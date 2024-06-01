@@ -1,0 +1,102 @@
+[
+  {
+    "title": "Introduction to Python",
+    "banner_image": "/src/assets/class_img_1.jpg",
+    "teacher_name": "John Doe",
+    "teacher_image": "https://kinforce.net/learen/wp-content/uploads/2022/08/small-business-owners-startup-and-e-commerce-conce-83S5W35.jpg",
+    "price": 49.99,
+    "category":"Art",
+    "short_description": "Learn the basics of Python programming, including syntax, data types, and basic algorithms.",
+    "total_enrolment": 150
+  },
+  {
+    "title": "Mastering Data Science with R",
+    "banner_image": "/src/assets/class_img_2.jpg",
+    "teacher_name": "Jane Smith",
+    "teacher_image": "https://kinforce.net/learen/wp-content/uploads/2022/08/small-business-owners-startup-and-e-commerce-conce-83S5W35.jpg",
+    "price": 99.99,
+    "category":"Art",
+    "short_description": "Become an expert in data science using R. Topics include data manipulation, visualization, and statistical analysis.",
+    "total_enrolment": 300
+  },
+  {
+    "title": "Web Development Bootcamp",
+    "banner_image": "/src/assets/class_img_3.jpg",
+    "teacher_name": "Michael Brown",
+    "teacher_image": "https://kinforce.net/learen/wp-content/uploads/2022/08/small-business-owners-startup-and-e-commerce-conce-83S5W35.jpg",
+    "price": 199.99,
+    "category":"Art",
+    "short_description": "A comprehensive bootcamp on web development covering HTML, CSS, JavaScript, and popular frameworks.",
+    "total_enrolment": 500
+  },
+  {
+    "title": "Graphic Design for Beginners",
+    "banner_image": "/src/assets/class_img_4.jpg",
+    "teacher_name": "Emily Johnson",
+    "teacher_image": "https://kinforce.net/learen/wp-content/uploads/2022/08/small-business-owners-startup-and-e-commerce-conce-83S5W35.jpg",
+    "price": 79.99,
+    "category":"Art",
+    "short_description": "Learn the fundamentals of graphic design, including typography, color theory, and software tools.",
+    "total_enrolment": 200
+  },
+  {
+    "title": "Digital Marketing 101",
+    "banner_image": "/src/assets/class_img_5.jpg",
+    "teacher_name": "David Wilson",
+    "teacher_image": "https://kinforce.net/learen/wp-content/uploads/2022/08/small-business-owners-startup-and-e-commerce-conce-83S5W35.jpg",
+    "price": 59.99,
+    "category":"Art",
+    "short_description": "An introductory course on digital marketing strategies, SEO, social media marketing, and more.",
+    "total_enrolment": 350
+  },
+  {
+    "title": "Photography Masterclass",
+    "banner_image": "/src/assets/class_img_6.jpg",
+    "teacher_name": "Sarah Lee",
+    "teacher_image": "https://kinforce.net/learen/wp-content/uploads/2022/08/small-business-owners-startup-and-e-commerce-conce-83S5W35.jpg",
+    "price": 129.99,
+    "category":"Art",
+    "short_description": "Master the art of photography with lessons on composition, lighting, and post-processing.",
+    "total_enrolment": 180
+  },
+  {
+    "title": "Excel for Business",
+    "banner_image": "/src/assets/class_img_1.jpg",
+    "teacher_name": "Chris Anderson",
+    "teacher_image": "https://kinforce.net/learen/wp-content/uploads/2022/08/small-business-owners-startup-and-e-commerce-conce-83S5W35.jpg",
+    "price": 39.99,
+    "category":"Art",
+    "short_description": "Learn how to use Microsoft Excel effectively for business purposes, including data analysis and visualization.",
+    "total_enrolment": 220
+  },
+  {
+    "title": "Creative Writing Workshop",
+    "banner_image": "/src/assets/class_img_2.jpg",
+    "teacher_name": "Jessica Martin",
+    "teacher_image": "https://kinforce.net/learen/wp-content/uploads/2022/08/small-business-owners-startup-and-e-commerce-conce-83S5W35.jpg",
+    "price": 69.99,
+    "category":"Art",
+    "short_description": "Develop your creative writing skills with exercises and feedback from experienced writers.",
+    "total_enrolment": 130
+  },
+  {
+    "title": "Introduction to Machine Learning",
+    "banner_image": "/src/assets/class_img_3.jpg",
+    "teacher_name": "Daniel Walker",
+    "teacher_image": "https://kinforce.net/learen/wp-content/uploads/2022/08/small-business-owners-startup-and-e-commerce-conce-83S5W35.jpg",
+    "price": 149.99,
+    "category":"Art",
+    "short_description": "A beginner's guide to machine learning concepts, algorithms, and practical applications.",
+    "total_enrolment": 400
+  },
+  {
+    "title": "Yoga for Beginners",
+    "banner_image": "/src/assets/class_img_4.jpg",
+    "teacher_name": "Laura Thompson",
+    "teacher_image": "https://example.com/images/laura_thompson.jpg",
+    "price": 29.99,
+    "category":"Art",
+    "short_description": "Learn the basics of yoga with guided sessions on postures, breathing techniques, and relaxation.",
+    "total_enrolment": 250
+  }
+]

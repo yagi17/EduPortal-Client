@@ -3,17 +3,18 @@ import Navbar from "../Shared/Navbar";
 import Footer from "../Shared/Footer";
 
 const Main = () => {
-    const location = useLocation();
-  
-    const removeNavFooter = location.pathname.includes("login") || location.pathname.includes("signup")
-  
-    return (
-      <div>
-        {removeNavFooter || <Navbar></Navbar>}
-        <Outlet></Outlet>
-        {removeNavFooter || <Footer></Footer>}
-      </div>
-    );
-  };
-  
-  export default Main;
+  const location = useLocation();
+
+  const removeNavFooter =
+    location.pathname.includes("login") || location.pathname.includes("signup");
+
+  return (
+    <div>
+      {removeNavFooter || <Navbar></Navbar>}
+      <Outlet></Outlet>
+      {removeNavFooter || <Footer></Footer>}
+    </div>
+  );
+};
+
+export default Main;
