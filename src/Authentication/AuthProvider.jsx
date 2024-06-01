@@ -9,11 +9,9 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-import { app } from "../Firebase/Firebase.config";
-// import useAxiosPublic from "../Hooks/useAxiosPublic";
+import auth from "../Firebase/firebase.config.js";
 
 export const AuthContext = createContext(null);
-const auth = getAuth(app);
 
 const googleProvider = new GoogleAuthProvider();
 

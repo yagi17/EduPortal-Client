@@ -2,9 +2,19 @@ import { CgProfile } from "react-icons/cg";
 import { IoLogInOutline, IoLogOutOutline } from "react-icons/io5";
 import { MdDashboard } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom";
-import PrimaryBtn from "../Components/PrimaryBtn";
+import useAuth from "../Routers/useAuth";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const links = (
     <>
       <li>
@@ -69,47 +79,54 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end">
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                />
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    alt="Tailwind CSS Navbar component"
+                    src={user?.photoURL || "User.svg"
+                    }
+                  />
+                </div>
               </div>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-32"
-            >
-              <p className="text-center">Name</p>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-32"
+              >
+                <p className="text-center">{user.displayName}</p>
 
-              <li>
-                <Link>
-                  <CgProfile />
-                  Profile
-                </Link>
-              </li>
-              <li>
-                <Link>
-                  <MdDashboard />
-                  Dashboard
-                </Link>
-              </li>
-              <li>
-                <Link>
-                  <IoLogOutOutline /> Logout
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <Link to={'/login'} className="btn bg-[#1DA678] hover:bg-[#1DA678] text-white ">
-            <IoLogInOutline /> Login
-          </Link>
+                <li>
+                  <Link>
+                    <CgProfile />
+                    Profile
+                  </Link>
+                </li>
+                <li>
+                  <Link>
+                    <MdDashboard />
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link onClick={handleLogout} to={'/login'}>
+                    <IoLogOutOutline /> Logout
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <Link
+              to={"/login"}
+              className="btn bg-[#1DA678] hover:bg-[#1DA678] text-white "
+            >
+              <IoLogInOutline /> Login
+            </Link>
+          )}
         </div>
       </div>
     </div>

@@ -1,13 +1,14 @@
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import useAuth from "../../Routers/useAuth";
 
 const SignUp = () => {
-    // const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useAuth();
 
-//   const navigate = useNavigate();
+  //   const navigate = useNavigate();
 
-//   const axiosPublic = useAxiosPublic();
+  //   const axiosPublic = useAxiosPublic();
 
   const {
     register,
@@ -16,12 +17,26 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
+  const onSubmit = (data) => {
+    createUser(data.email, data.password).then((result) => {
+      const loggerUser = result.user;
+      console.log(loggerUser);
+      updateUserProfile(data.name, data.photoUrl).then(() => {
+        const userInfo = {
+          name: data.name,
+          email: data.email,
+          photo: data.photoUrl,
+        };
+        
+      });
+    });
+  };
+
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col md:flex-row gap-16">
-
         <div className="card w-1/2 shrink-0 max-w-sm shadow-2xl bg-base-100">
-          <form className="card-body">
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -68,7 +83,7 @@ const SignUp = () => {
                 className="input input-bordered"
               />
               {errors.email && (
-                <span className="text-red-500 text-xs">Name is required</span>
+                <span className="text-red-500 text-xs">Email is required</span>
               )}
             </div>
             <div className="form-control">
@@ -103,15 +118,20 @@ const SignUp = () => {
               </label>
             </div>
             <div className="form-control">
-              <button className="btn bg-[#1DA678] hover:bg-[#1DA678] text-white">Sign Up</button>
+              <button className="btn bg-[#1DA678] hover:bg-[#1DA678] text-white">
+                Sign Up
+              </button>
             </div>
           </form>
           <button className="mx-20 btn bg-white border-white hover:bg-white text-center">
-              <FcGoogle /> Google
-            </button>
+            <FcGoogle /> Google
+          </button>
           <p className="text-center pb-6">
             <small>
-              Already have an account ?<Link className="text-blue-600" to={"/login"}>Login Here</Link>
+              Already have an account ?
+              <Link className="text-blue-600" to={"/login"}>
+                Login Here
+              </Link>
             </small>
           </p>
         </div>
