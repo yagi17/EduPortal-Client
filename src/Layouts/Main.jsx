@@ -6,7 +6,7 @@ const Main = () => {
   const location = useLocation();
 
   const removeNavFooter =
-    location.pathname.includes("login") || location.pathname.includes("signup");
+    location.pathname.includes("login") || location.pathname.includes("sign-up");
 
   return (
     <div>
