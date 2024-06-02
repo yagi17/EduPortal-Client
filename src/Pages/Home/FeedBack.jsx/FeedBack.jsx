@@ -1,23 +1,35 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { useEffect, useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const FeedBack = () => {
   const [reviews, setReviews] = useState([]);
-  // console.log(reviews);
+  const axiosPublic = useAxiosPublic();
+
   useEffect(() => {
-    fetch("rating.json")
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
-  }, []);
+    axiosPublic.get("/reviews").then((res) => {
+      setReviews(res.data);
+      // console.log(res.data);
+    });
+  }, [axiosPublic]);
   return (
     <section className="max-w-6xl mx-auto my-10">
-      <p className="lg:text-4xl font-bold text-center">Check what our Students say about us</p>
-      <Swiper navigation={true} modules={[Navigation]} className="mySwiper max-w-xl my-8 mx-auto">
+      <p className="lg:text-4xl font-bold text-center">
+        Check what our Students say about us
+      </p>
+      <Swiper
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: false,
+        }}
+        modules={[Autoplay,Navigation]}
+        className="mySwiper max-w-xl my-8 mx-auto"
+      >
         {reviews.map((review) => (
           <SwiperSlide key={review._id}>
             <div className="mx-auto md:w-40 lg:w-72 flex items-center flex-col text-center ">

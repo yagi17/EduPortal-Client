@@ -3,19 +3,20 @@ import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 // import ClassCard from "../AllClasses/ClassCard";
 import PrimaryBtn from "../../../Components/PrimaryBtn";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const Highlights = () => {
   const [highlights, setHighlights] = useState([]);
   const showHighlights = highlights.slice(0, 6);
+  const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
-    fetch("data.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setHighlights(data);
-        console.log(data);
-      });
-  }, []);
+    axiosPublic.get("/classes")
+    .then((res) => {
+      setHighlights(res.data)
+      // console.log(res.data);
+    });
+  }, [axiosPublic]);
 
   return (
     <section className="bg-[#FFF1E7] py-8">
@@ -32,14 +33,12 @@ const Highlights = () => {
           modules={[Pagination]}
           className="mySwiper my-6 bg-[#FFF1E7]"
           breakpoints={{
-            // when window width is >= 640px
             100: {
               slidesPerView: 1,
             },
             426: {
               slidesPerView: 2,
             },
-            // when window width is >= 768px
             768: {
               slidesPerView: 4,
             },

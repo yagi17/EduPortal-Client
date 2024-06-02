@@ -2,7 +2,7 @@ import { CgProfile } from "react-icons/cg";
 import { IoLogInOutline, IoLogOutOutline } from "react-icons/io5";
 import { MdDashboard } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom";
-import useAuth from "../Routers/useAuth";
+import useAuth from "../Hooks/useAuth";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
