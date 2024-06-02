@@ -88,10 +88,12 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <a className="text-xl cursor-pointer font-bold">EduPortal</a>
+          <Link to={'/'} className="text-xl cursor-pointer font-bold">EduPortal</Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="flex justify-between space-x-10 px-1 text-sm font-bold">{links}</ul>
+          <ul className="flex justify-between space-x-10 px-1 text-sm font-bold">
+            {links}
+          </ul>
         </div>
 
         <div className="navbar-end">
@@ -113,7 +115,12 @@ const Navbar = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-32"
               >
-                <p className="text-center">{user.displayName}</p>
+                <p className="text-[#1DA678] pl-3 font-semibold">
+                  Hi,{" "}
+                  <span className="uppercase">
+                    {user.displayName.split(" ").slice(0, 1).join(" ")}
+                  </span>
+                </p>
 
                 <li>
                   <Link>

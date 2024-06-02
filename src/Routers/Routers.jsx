@@ -5,7 +5,7 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import AllClasses from "../Pages/AllClasses/AllClasses";
 import ClassDetails from "../Pages/AllClasses/ClassDetails";
-
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -21,8 +21,18 @@ export const router = createBrowserRouter([
         element: <AllClasses></AllClasses>,
       },
       {
-        path: `/all-classes/${id}`,
-        element: <ClassDetails></ClassDetails> ,
+        path: "/all-classes",
+        element: <AllClasses></AllClasses>,
+      },
+      {
+        path: `/all-classes/:id`,
+        element: (
+          <PrivateRoute>
+            <ClassDetails></ClassDetails>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/classes/${params.id}`),
       },
       {
         path: "/login",

@@ -2,6 +2,7 @@ import PrimaryBtn from "../../Components/PrimaryBtn";
 
 const ClassCard = ({ classes }) => {
   const {
+    _id,
     title,
     banner_image,
     teacher_name,
@@ -10,6 +11,7 @@ const ClassCard = ({ classes }) => {
     short_description,
     total_enrolment,
   } = classes;
+  console.log(classes);
   return (
     <div className="card bg-base-100 border hover:shadow-2xl hover:shadow-[#1DA678]/50 duration-300">
       <figure className="">
@@ -30,7 +32,7 @@ const ClassCard = ({ classes }) => {
         </div>
         <h2 className="card-title font-bold">{title}</h2>
         <p className="text-xs">{short_description}</p>
-        <PrimaryBtn to={''} name={"View Class Details"} customClass={"w-full"}></PrimaryBtn>
+        <PrimaryBtn link={`/all-classes/${_id}`} name={"View Class Details"} customClass={"w-full"}></PrimaryBtn>
       </div>
     </div>
   );
