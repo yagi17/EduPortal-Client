@@ -11,9 +11,8 @@ const Highlights = () => {
   const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
-    axiosPublic.get("/classes")
-    .then((res) => {
-      setHighlights(res.data)
+    axiosPublic.get("/classes").then((res) => {
+      setHighlights(res.data);
       console.log(res.data);
     });
   }, [axiosPublic]);
@@ -48,7 +47,11 @@ const Highlights = () => {
             <SwiperSlide key={highlight._id}>
               <div className="card bg-base-100 hover:shadow-[#EF5743]/50">
                 <figure className="">
-                  <img src={highlight.banner_image} alt="Shoes" />
+                  <img
+                    className="h-52"
+                    src={highlight.banner_image}
+                    alt="Shoes"
+                  />
                 </figure>
 
                 <div className="inline-flex flex-grow card-body">
@@ -69,11 +72,12 @@ const Highlights = () => {
                   <p className="text-xs">
                     {highlight.short_description
                       .split(" ")
-                      .slice(0, 12)
+                      .slice(0, 8)
                       .join(" ")}
                   </p>
 
                   <PrimaryBtn
+                    link={`/all-classes/${highlight._id}`}
                     name={"Enroll"}
                     customClass={"w-full"}
                   ></PrimaryBtn>

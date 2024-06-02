@@ -15,7 +15,7 @@ const ClassCard = ({ classes }) => {
   return (
     <div className="card bg-base-100 border hover:shadow-2xl hover:shadow-[#1DA678]/50 duration-300">
       <figure className="">
-        <img src={banner_image} alt="Shoes" />
+        <img className="h-64" src={banner_image} alt="Shoes" />
       </figure>
 
       <div className="inline-flex flex-grow card-body">

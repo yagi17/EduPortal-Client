@@ -6,6 +6,8 @@ import SignUp from "../Pages/SignUp/SignUp";
 import AllClasses from "../Pages/AllClasses/AllClasses";
 import ClassDetails from "../Pages/AllClasses/ClassDetails";
 import PrivateRoute from "./PrivateRoute";
+import TeachOn from "../Pages/TeachOn/TeachOn";
+import Highlights from "../Pages/Home/Highlights/Highlights";
 
 export const router = createBrowserRouter([
   {
@@ -20,9 +22,13 @@ export const router = createBrowserRouter([
         path: "/all-classes",
         element: <AllClasses></AllClasses>,
       },
+      // {
+      //   path: "/highlight",
+      //   element: <Highlights></Highlights>,
+      // },
       {
-        path: "/all-classes",
-        element: <AllClasses></AllClasses>,
+        path: "/join-as-teacher",
+        element: <PrivateRoute><TeachOn></TeachOn></PrivateRoute>,
       },
       {
         path: `/all-classes/:id`,

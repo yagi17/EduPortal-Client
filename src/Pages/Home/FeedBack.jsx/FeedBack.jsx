@@ -19,40 +19,50 @@ const FeedBack = () => {
     });
   }, [axiosPublic]);
   return (
-    <section className="max-w-6xl mx-auto my-10">
-      <p className="lg:text-4xl font-bold text-center">
-        Check what our Students say about us
-      </p>
-      <Swiper
-        autoplay={{
-          delay: 2000,
-          disableOnInteraction: false,
-        }}
-        modules={[Autoplay, Navigation]}
-        className="mySwiper max-w-3xl my-8 mx-auto"
-      >
-        {reviews.map((review) => (
-          <SwiperSlide key={review._id}>
-            <div className="mx-auto md:w-52 lg:w-11/12 flex items-center flex-col text-center ">
-              <p className="py-8 text-xl flex"><span className="justify-start text-sm"><FaQuoteLeft /></span>{review.details} <span className="justify-end"><FaQuoteRight /></span></p>
+    <section className=" py-32 bg-gradient-to-r from-[#530E9F] to-[#2574FA] text-white">
+      <div className="max-w-6xl mx-auto  my-10">
+        {/* <p className="lg:text-4xl font-bold text-center">
+          Check what our Students say about us
+        </p> */}
+        <Swiper
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+          }}
+          modules={[Autoplay, Navigation]}
+          className="mySwiper max-w-3xl my-8 mx-auto"
+        >
+          {reviews.map((review) => (
+            <SwiperSlide key={review._id}>
+              <div className="mx-auto md:w-52 lg:w-11/12 flex items-center flex-col text-center ">
+                <p className="py-8 text-xl flex italic ">
+                  <span className="justify-start  text-sm">
+                    <FaQuoteLeft />
+                  </span>
+                  {review.details}{" "}
+                  <span className="justify-end">
+                    <FaQuoteRight />
+                  </span>
+                </p>
 
-              <div className="avatar pb-10">
-                <div className="w-20 rounded-full">
-                  <img src={"userName"} />
+                <div className="avatar pb-10">
+                  <div className="w-20 rounded-full">
+                    <img src={"userName"} />
+                  </div>
                 </div>
+                <h3 className="text-sm font-semibold mb-4">
+                  {review.name}
+                </h3>
+                <Rating
+                  style={{ maxWidth: 120 }}
+                  value={review.rating}
+                  readOnly
+                />
               </div>
-              <h3 className="text-sm font-semibold mb-4 text-[#1DA678]">
-                {review.name}
-              </h3>
-              <Rating
-                style={{ maxWidth: 120 }}
-                value={review.rating}
-                readOnly
-              />
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </section>
   );
 };

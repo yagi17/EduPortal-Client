@@ -67,28 +67,14 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className=" flex flex-col justify-between space-y-4  text-sm font-bold dropdown-content mt-3 z-[1] p-4 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
-                <a>Item 1</a>
-              </li>
-              <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a>Item 3</a>
-              </li>
+              {links}
             </ul>
           </div>
-          <Link to={'/'} className="text-xl cursor-pointer font-bold">EduPortal</Link>
+          <Link to={"/"} className="text-xl cursor-pointer font-bold">
+            EduPortal
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="flex justify-between space-x-10 px-1 text-sm font-bold">

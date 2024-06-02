@@ -1,6 +1,8 @@
 import PrimaryBtn from "../../../Components/PrimaryBtn";
 import bannerImg from "../../../assets/BannerImage.png";
+
 const Banner = () => {
+
   return (
     <section className="hero min-h-screen bg-[#DFE1FB]">
       <div className="hero-content flex-col lg:flex-row-reverse max-w-6xl">
@@ -12,10 +14,7 @@ const Banner = () => {
             university in various fields: programming, photography, marketing
             and management
           </p>
-          {/* <button className="btn bg-gradient-to-r from-[#FF0844] to-[#FF8565] text-white btn-lg">
-            Get Started
-          </button> */}
-          <PrimaryBtn name={"Get Started"} btn={"btn-lg"}></PrimaryBtn>
+          <PrimaryBtn link={'/all-classes'} name={"Get Started"} btn={"btn-lg"}></PrimaryBtn>
         </div>
       </div>
     </section>
