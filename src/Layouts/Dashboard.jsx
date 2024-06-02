@@ -34,8 +34,8 @@ const Dashboard = () => {
           <div className="w-24 mx-auto rounded-full">
             <img src={user?.photoURL || "User.svg"} />
           </div>
-          <h2 className="text-black p-2 uppercase">
-            {user.displayName.split(" ").slice(0, 1).join(" ")}
+          <h2 className="text-black p-2 text-xs uppercase">
+            Welcome Back {user.displayName.split(" ").slice(0, 1).join(" ")}
           </h2>
         </div>
         <ul className="flex flex-col justify-between gap-4 px-10 text-sm">
