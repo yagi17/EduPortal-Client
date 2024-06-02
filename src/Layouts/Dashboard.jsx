@@ -1,12 +1,14 @@
-import { FaHome, FaSearch } from "react-icons/fa";
+import { FaHome, FaList, FaSearch, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import { FiLogOut } from "react-icons/fi";
 import useAdmin from "../Hooks/useAdmin";
 import useTeacher from "../Hooks/useTeacher";
+import { ImProfile } from "react-icons/im";
 
 const Dashboard = () => {
   const { user, logOut } = useAuth();
+  console.log(user);
   const handleLogout = () => {
     logOut()
       .then(() => {})
@@ -16,11 +18,18 @@ const Dashboard = () => {
   };
 
   const [isAdmin] = useAdmin();
-  const [isTeacher] = useTeacher()
+  const [isTeacher] = useTeacher();
 
   return (
-    <div className="flex">
-      <div className="border w-52 h-screen py-10">
+    <div className="flex p-0">
+      <div
+        className={
+          isAdmin
+            ? "min-h-screen bg-green-500  w-52 h-screen py-10"
+            : "min-h-screen bg-orange-400"
+        }
+      >
+        {/* user avatar */}
         <div className="avatar mx-auto w-full text-center flex-col">
           <div className="w-24 mx-auto rounded-full">
             <img src={user?.photoURL || "User.svg"} />
@@ -32,42 +41,81 @@ const Dashboard = () => {
         <ul className="flex flex-col justify-between gap-4 px-10 text-sm">
           {isAdmin ? (
             <>
-              this is admin
+              <li>
+                <NavLink
+                  className={`flex font-semibold items-center gap-2`}
+                  to={"admin-home"}
+                >
+                  <FaHome />
+                  Teacher Request
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={`flex font-semibold items-center gap-2`}
+                  to={"admin-home"}
+                >
+                  <FaUsers />
+                  Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={`flex font-semibold items-center gap-2`}
+                  to={"admin-home"}
+                >
+                  <FaList />
+                  All classes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={`flex font-semibold items-center gap-2`}
+                  to={"admin-home"}
+                >
+                  <FaHome />
+                  Admin Home
+                </NavLink>
+              </li>
             </>
-          ) :
-          isTeacher? 
-          <>
-          this is teacher
-          </> :
-          
-          
-            <>
-            this is user
-            </>
-          }
+          ) : isTeacher ? (
+            <>this is teacher</>
+          ) : (
+            <>this is user</>
+          )}
+
+          <li>
+            <NavLink
+              className={`flex font-semibold items-center gap-2`}
+              to={"admin-home"}
+            >
+              <ImProfile />
+              My Profile
+            </NavLink>
+          </li>
 
           {/* shared nav links */}
           <div className="divider"></div>
 
-          <li className="group transition-all duration-100 ease-in-out">
+          <li>
             <NavLink
-              className={`bg-left-bottom ml-1 bg-gradient-to-r from-[#1DA678] to-[#1DA678] bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out flex items-center gap-2`}
+              className={`flex font-semibold items-center gap-2`}
               to={"/"}
             >
               <FaHome /> Home
             </NavLink>
           </li>
-          <li className="group transition-all duration-100 ease-in-out">
+          <li>
             <NavLink
-              className={`bg-left-bottom ml-1 bg-gradient-to-r from-[#1DA678] to-[#1DA678] bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out flex items-center gap-2`}
+              className={`flex font-semibold items-center gap-2`}
               to={"/all-classes"}
             >
               <FaSearch /> All Classes
             </NavLink>
           </li>
-          <li className="group transition-all duration-100 ease-in-out">
+          <li>
             <NavLink
-              className={`bg-left-bottom ml-1 bg-gradient-to-r from-[#1DA678] to-[#1DA678] bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out flex items-center gap-2`}
+              className={`flex font-semibold items-center gap-2`}
               onClick={handleLogout}
               to={"/login"}
             >

@@ -107,15 +107,8 @@ const Navbar = () => {
                     {user.displayName.split(" ").slice(0, 1).join(" ")}
                   </span>
                 </p>
-
                 <li>
-                  <Link>
-                    <CgProfile />
-                    Profile
-                  </Link>
-                </li>
-                <li>
-                  <Link to={'/dashboard'}>
+                  <Link to={"/dashboard"}>
                     <MdDashboard />
                     Dashboard
                   </Link>

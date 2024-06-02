@@ -11,6 +11,7 @@ import Dashboard from "../Layouts/Dashboard";
 import UserHome from "../Pages/Dashboard/User/UserHome";
 import AdminHome from "../Pages/Dashboard/Admin/AdminHome";
 import TeacherHome from "../Pages/Dashboard/Teacher/TeacherHome";
+import Profile from "../Pages/Dashboard/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -54,13 +55,17 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "dashboard",
+    path: "/dashboard",
     element: (
       <PrivateRoute>
         <Dashboard></Dashboard>
       </PrivateRoute>
     ),
     children: [
+      {
+        path: "/dashboard",
+        element: <Profile></Profile>,
+      },
       // User Dashboard
       {
         path: "user-home",
