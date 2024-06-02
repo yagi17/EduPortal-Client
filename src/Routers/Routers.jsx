@@ -7,7 +7,10 @@ import AllClasses from "../Pages/AllClasses/AllClasses";
 import ClassDetails from "../Pages/AllClasses/ClassDetails";
 import PrivateRoute from "./PrivateRoute";
 import TeachOn from "../Pages/TeachOn/TeachOn";
-import Highlights from "../Pages/Home/Highlights/Highlights";
+import Dashboard from "../Layouts/Dashboard";
+import UserHome from "../Pages/Dashboard/User/UserHome";
+import AdminHome from "../Pages/Dashboard/Admin/AdminHome";
+import TeacherHome from "../Pages/Dashboard/Teacher/TeacherHome";
 
 export const router = createBrowserRouter([
   {
@@ -22,13 +25,13 @@ export const router = createBrowserRouter([
         path: "/all-classes",
         element: <AllClasses></AllClasses>,
       },
-      // {
-      //   path: "/highlight",
-      //   element: <Highlights></Highlights>,
-      // },
       {
         path: "/join-as-teacher",
-        element: <PrivateRoute><TeachOn></TeachOn></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <TeachOn></TeachOn>
+          </PrivateRoute>
+        ),
       },
       {
         path: `/all-classes/:id`,
@@ -47,6 +50,31 @@ export const router = createBrowserRouter([
       {
         path: "/sign-up",
         element: <SignUp></SignUp>,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
+    children: [
+      // User Dashboard
+      {
+        path: "user-home",
+        element: <UserHome></UserHome>,
+      },
+      // Teacher Dashboard
+      {
+        path: "teacher-home",
+        element: <TeacherHome></TeacherHome>,
+      },
+      // Admin Dashboard
+      {
+        path: "admin-home",
+        element: <AdminHome></AdminHome>,
       },
     ],
   },
