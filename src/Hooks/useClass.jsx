@@ -1,7 +1,5 @@
 
-
-const AllClass = () => {
-    
+const useClass = () => {
     return (
         <div>
             
@@ -9,4 +7,4 @@ const AllClass = () => {
     );
 };
 
-export default AllClass;
+export default useClass;

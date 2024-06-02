@@ -18,14 +18,29 @@ const Navbar = () => {
 
   const links = (
     <>
-      <li>
-        <NavLink to={"/"}>Home</NavLink>
+      <li className="group transition-all duration-100 ease-in-out">
+        <NavLink
+          className={`bg-left-bottom ml-1 bg-gradient-to-r from-[#1DA678] to-[#1DA678] bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out`}
+          to={"/"}
+        >
+          Home
+        </NavLink>
       </li>
-      <li>
-        <NavLink to={"/all-classes"}>All Classes</NavLink>
+      <li className="group transition-all duration-100 ease-in-out">
+        <NavLink
+          className={`bg-left-bottom ml-1 bg-gradient-to-r from-[#1DA678] to-[#1DA678] bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out`}
+          to={"/all-classes"}
+        >
+          All Classes
+        </NavLink>
       </li>
-      <li>
-        <NavLink to={"/join-as-teacher"}>Teach on EduPortal</NavLink>
+      <li className="group transition-all duration-100 ease-in-out">
+        <NavLink
+          className={`bg-left-bottom ml-1 bg-gradient-to-r from-[#1DA678] to-[#1DA678] bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out`}
+          to={"/join-as-teacher"}
+        >
+          Teach on EduPortal
+        </NavLink>
       </li>
     </>
   );
@@ -76,7 +91,7 @@ const Navbar = () => {
           <a className="text-xl cursor-pointer font-bold">EduPortal</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 font-semibold">{links}</ul>
+          <ul className="flex justify-between space-x-10 px-1 text-sm font-bold">{links}</ul>
         </div>
 
         <div className="navbar-end">
@@ -90,8 +105,7 @@ const Navbar = () => {
                 <div className="w-10 rounded-full">
                   <img
                     alt="Tailwind CSS Navbar component"
-                    src={user?.photoURL || "User.svg"
-                    }
+                    src={user?.photoURL || "User.svg"}
                   />
                 </div>
               </div>
@@ -114,7 +128,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link onClick={handleLogout} to={'/login'}>
+                  <Link onClick={handleLogout} to={"/login"}>
                     <IoLogOutOutline /> Logout
                   </Link>
                 </li>

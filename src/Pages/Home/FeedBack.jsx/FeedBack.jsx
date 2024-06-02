@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 
 const FeedBack = () => {
   const [reviews, setReviews] = useState([]);
@@ -27,27 +28,27 @@ const FeedBack = () => {
           delay: 2000,
           disableOnInteraction: false,
         }}
-        modules={[Autoplay,Navigation]}
-        className="mySwiper max-w-xl my-8 mx-auto"
+        modules={[Autoplay, Navigation]}
+        className="mySwiper max-w-3xl my-8 mx-auto"
       >
         {reviews.map((review) => (
           <SwiperSlide key={review._id}>
-            <div className="mx-auto md:w-40 lg:w-72 flex items-center flex-col text-center ">
+            <div className="mx-auto md:w-52 lg:w-11/12 flex items-center flex-col text-center ">
+              <p className="py-8 text-xl flex"><span className="justify-start text-sm"><FaQuoteLeft /></span>{review.details} <span className="justify-end"><FaQuoteRight /></span></p>
+
               <div className="avatar pb-10">
-                <div className="w-40 rounded-full">
-                  <img src={"user.displayName"} />
+                <div className="w-20 rounded-full">
+                  <img src={"userName"} />
                 </div>
               </div>
+              <h3 className="text-sm font-semibold mb-4 text-[#1DA678]">
+                {review.name}
+              </h3>
               <Rating
-                style={{ maxWidth: 180 }}
+                style={{ maxWidth: 120 }}
                 value={review.rating}
                 readOnly
               />
-
-              <p className="py-8 text-xs">{review.details}</p>
-              <h3 className="text-2xl font-semibold text-[#1DA678]">
-                {review.name}
-              </h3>
             </div>
           </SwiperSlide>
         ))}

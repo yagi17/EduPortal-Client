@@ -1,4 +1,4 @@
-import PrimaryBtn from "../../../Components/PrimaryBtn";
+import PrimaryBtn from "../../Components/PrimaryBtn";
 
 const ClassCard = ({ classes }) => {
   const {
@@ -11,7 +11,7 @@ const ClassCard = ({ classes }) => {
     total_enrolment,
   } = classes;
   return (
-    <div className="card bg-base-100 shadow-xl hover:shadow-lg hover:shadow-[#EF5743]/50">
+    <div className="card bg-base-100 border hover:shadow-2xl hover:shadow-[#1DA678]/50 duration-300">
       <figure className="">
         <img src={banner_image} alt="Shoes" />
       </figure>
@@ -24,13 +24,13 @@ const ClassCard = ({ classes }) => {
             </div>
           </div>
           <p className="text-green-500 text-xs">{teacher_name}</p>
-          <div className="shadow-lg shadow-[#EF5743] text-[10px] size-10 flex items-center text-center rounded-full text-white font-semibold bg-[#EF5743]">
+          <div className="shadow-lg shadow-[#1DA678] text-[10px] size-10 flex items-center text-center rounded-full text-white font-semibold bg-[#1DA678]">
             <p>${price}</p>
           </div>
         </div>
         <h2 className="card-title font-bold">{title}</h2>
         <p className="text-xs">{short_description}</p>
-        <PrimaryBtn name={"Enroll"} customClass={"w-full"}></PrimaryBtn>
+        <PrimaryBtn to={''} name={"View Class Details"} customClass={"w-full"}></PrimaryBtn>
       </div>
     </div>
   );
