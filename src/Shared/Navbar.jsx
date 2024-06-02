@@ -6,6 +6,7 @@ import useAuth from "../Routers/useAuth";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  console.log(user);
 
   const handleLogout = () => {
     logOut()

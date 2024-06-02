@@ -79,7 +79,7 @@ const SignUp = () => {
                 type="email"
                 {...register("email", { required: true })}
                 name="email"
-                placeholder="email"
+                placeholder="Email"
                 className="input input-bordered"
               />
               {errors.email && (
@@ -98,7 +98,7 @@ const SignUp = () => {
                   pattern: /^(?=.*[a-z])(?=.*[A-Z]).+$/,
                 })}
                 name="password"
-                placeholder="password"
+                placeholder="Password"
                 className="input input-bordered"
               />
               {errors.password?.type === "minLength" && (
