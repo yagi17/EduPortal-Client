@@ -13,7 +13,7 @@ const AllClasses = () => {
         axiosPublic.get('/classes')
         .then(res=>{
             setClasses(res.data)
-            console.log(res.data);
+            // console.log(res.data);
         })
     },[axiosPublic])
 

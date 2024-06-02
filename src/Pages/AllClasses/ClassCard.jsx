@@ -11,7 +11,7 @@ const ClassCard = ({ classes }) => {
     short_description,
     total_enrolment,
   } = classes;
-  console.log(classes);
+  // console.log(classes);
   return (
     <div className="card bg-base-100 border hover:shadow-2xl hover:shadow-[#1DA678]/50 duration-300">
       <figure className="">

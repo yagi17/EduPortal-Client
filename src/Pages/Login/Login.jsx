@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { signIn } = useAuth();
@@ -18,7 +19,16 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    signIn(data.email, data.password).then((res) => {
+    signIn(data.email, data.password)
+    .then((res) => {
+      console.log(res.data);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title:  ` Glad To See You Again`,
+        showConfirmButton: false,
+        timer: 2000,
+      });
       console.log(res);
       navigate(naviGate)
     });

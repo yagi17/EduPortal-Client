@@ -1,14 +1,16 @@
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
 
-  //   const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  //   const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxiosPublic();
 
   const {
     register,
@@ -18,18 +20,74 @@ const SignUp = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    createUser(data.email, data.password).then((result) => {
-      const loggerUser = result.user;
-      console.log(loggerUser);
-      updateUserProfile(data.name, data.photoUrl).then(() => {
-        const userInfo = {
-          name: data.name,
-          email: data.email,
-          photo: data.photoUrl,
-        };
-        
+    // console.log(data);
+    createUser(data.email, data.password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        updateUserProfile(data.name, data.photoUrl)
+          .then(() => {
+            // send to data base
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+              photo: data.photoUrl,
+            };
+            axiosPublic.post("/users", userInfo)
+            .then(res => {
+              console.log(res.data);
+              if (res.data.insertedId) {
+                console.log('user added to the database' );
+                reset();
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: `${data.name} Welcome`,
+                  showConfirmButton: false,
+                  timer: 2000,
+                });
+                navigate("/");
+              }
+            });
+          })
+          .catch((error) => console.log(error));
+      })
+      .catch((error) => {
+        console.error("Error creating user:", error.message);
+        if (error.code === "auth/email-already-in-use") {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            },
+          });
+          Toast.fire({
+            icon: "error",
+            title: "Email is already in use. Please try another email.",
+          });
+        } else {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            },
+          });
+          Toast.fire({
+            icon: "error",
+            title: "Something went wrong. Please try again later.",
+          });
+        }
       });
-    });
   };
 
   return (

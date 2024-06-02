@@ -13,7 +13,7 @@ const Highlights = () => {
   useEffect(() => {
     axiosPublic.get("/classes").then((res) => {
       setHighlights(res.data);
-      console.log(res.data);
+      // console.log(res.data);
     });
   }, [axiosPublic]);
 

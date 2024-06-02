@@ -2,6 +2,8 @@ import { FaHome, FaSearch } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import { FiLogOut } from "react-icons/fi";
+import useAdmin from "../Hooks/useAdmin";
+import useTeacher from "../Hooks/useTeacher";
 
 const Dashboard = () => {
   const { user, logOut } = useAuth();
@@ -12,16 +14,38 @@ const Dashboard = () => {
         console.log(error);
       });
   };
+
+  const [isAdmin] = useAdmin();
+  const [isTeacher] = useTeacher()
+
   return (
     <div className="flex">
       <div className="border w-52 h-screen py-10">
         <div className="avatar mx-auto w-full text-center flex-col">
           <div className="w-24 mx-auto rounded-full">
-            <img src={user?.photoURL} />
+            <img src={user?.photoURL || "User.svg"} />
           </div>
-          <h2 className="text-black p-2 uppercase border">{user.displayName}</h2>
+          <h2 className="text-black p-2 uppercase">
+            {user.displayName.split(" ").slice(0, 1).join(" ")}
+          </h2>
         </div>
         <ul className="flex flex-col justify-between gap-4 px-10 text-sm">
+          {isAdmin ? (
+            <>
+              this is admin
+            </>
+          ) :
+          isTeacher? 
+          <>
+          this is teacher
+          </> :
+          
+          
+            <>
+            this is user
+            </>
+          }
+
           {/* shared nav links */}
           <div className="divider"></div>
 

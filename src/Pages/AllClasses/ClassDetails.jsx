@@ -12,7 +12,7 @@ const ClassDetails = () => {
     short_description,
     total_enrolment,
   } = useLoaderData();
-  console.log(banner_image);
+  // console.log(banner_image);
 
   return (
     <div
