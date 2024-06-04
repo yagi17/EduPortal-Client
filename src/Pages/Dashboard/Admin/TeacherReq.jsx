@@ -13,42 +13,60 @@ const TeacherReq = () => {
   });
 
   const handleApprove = (request) => {
-    console.log(request);
+    // console.log(request);
     Swal.fire({
-        title: "Confirm Request",
-        text: "Are you sure you want to give Admin role",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, Confirm it!",
-      })
-      .then(res=>{
-        if(res.isConfirmed){
-            axiosSecure.patch(`/users/${request.email}`)
-            .then(res=>{
-                console.log('User is teacher Now', res.data);
-                if(res.data.modifiedCount > 0){
-                    Swal.fire({
-                        position: "top",
-                        icon: "success",
-                        title: `${request.name} Has Been Updated`,
-                        showConfirmButton: false,
-                        timer: 1500,
-                      });
-                      axiosSecure.delete(`/teacher-req/${request._id}`)
-                      .then(res=>{
-                        if (res.data.deletedCount > 0) {
-                            refetch()
-                        }
-                      })
-                }
-            })
-        }
-      })
+      title: "Confirm Request",
+      text: "Please Confirm The Approval",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Confirm it!",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axiosSecure.patch(`/users/${request.email}`).then((res) => {
+          console.log("User is teacher Now", res.data);
+          if (res.data.modifiedCount > 0) {
+            Swal.fire({
+              position: "top",
+              icon: "success",
+              title: `${request.name} Has Been Updated`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            axiosSecure.delete(`/teacher-req/${request._id}`).then((res) => {
+              if (res.data.deletedCount > 0) {
+                refetch();
+                Swal.fire({
+                  text: "Request has been rejected",
+                });
+              }
+            });
+          }
+        });
+      }
+    });
   };
 
-  const handleReject = () => {};
+  const handleReject = (request) => {
+    Swal.fire({
+      title: "Confirm Request",
+      text: "Are you sure you want to give Admin role",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Confirm it!",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axiosSecure.delete(`/teacher-req/${request._id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+          }
+        });
+      }
+    });
+  };
 
   return (
     <div>
