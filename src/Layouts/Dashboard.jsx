@@ -1,14 +1,21 @@
-import { FaHome, FaList, FaSearch, FaUsers } from "react-icons/fa";
+import {
+  FaHome,
+  FaList,
+  FaRegAddressCard,
+  FaRegFileAlt,
+  FaSearch,
+  FaUsers,
+} from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import { FiLogOut } from "react-icons/fi";
 import useAdmin from "../Hooks/useAdmin";
 import useTeacher from "../Hooks/useTeacher";
-import { ImProfile } from "react-icons/im";
+import { MdAddCircleOutline } from "react-icons/md";
 
 const Dashboard = () => {
   const { user, logOut } = useAuth();
-  console.log(user);
+  // console.log(user);
   const handleLogout = () => {
     logOut()
       .then(() => {})
@@ -38,7 +45,10 @@ const Dashboard = () => {
             <img src={user?.photoURL || "User.svg"} />
           </div>
           <h2 className="text-black p-2 text-xs uppercase">
-            Welcome {user?.displayName ? user.displayName.split(" ").slice(0, 2).join(" ") : 'Back'}
+            Welcome{" "}
+            {user?.displayName
+              ? user.displayName.split(" ").slice(0, 2).join(" ")
+              : "Back"}
           </h2>
         </div>
         <ul className="flex flex-col justify-between gap-4 px-10 text-sm">
@@ -78,12 +88,31 @@ const Dashboard = () => {
                   to={"admin-home"}
                 >
                   <FaList />
-                  All classes
+                  All Classes
                 </NavLink>
               </li>
             </>
           ) : isTeacher ? (
-            <>this is teacher</>
+            <>
+              <li>
+                <NavLink
+                  className={`flex font-semibold items-center gap-2`}
+                  to={"add-class"}
+                >
+                  <MdAddCircleOutline />
+                  Add Class
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={`flex font-semibold items-center gap-2`}
+                  to={"my-classes"}
+                >
+                  <FaRegFileAlt />
+                  My Classes
+                </NavLink>
+              </li>
+            </>
           ) : (
             <>this is user</>
           )}
@@ -91,9 +120,9 @@ const Dashboard = () => {
           <li>
             <NavLink
               className={`flex font-semibold items-center gap-2`}
-              to={"admin-home"}
+              to={"/dashboard"}
             >
-              <ImProfile />
+              <FaRegAddressCard />
               My Profile
             </NavLink>
           </li>
@@ -129,7 +158,7 @@ const Dashboard = () => {
           </li>
         </ul>
       </div>
-      <div className="flex-1 px-16">
+      <div className="flex-1">
         <Outlet></Outlet>
       </div>
     </div>

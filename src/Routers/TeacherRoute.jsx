@@ -15,7 +15,7 @@ const TeacherRoute = ({ children }) => {
       </div>
     );
   }
-  if (user && isTeacher && isAdmin) {
+  if (user && isTeacher || isAdmin) {
     return children;
   }
   return <Navigate to={"/dashboard"} />;

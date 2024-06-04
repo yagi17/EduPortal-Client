@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const axiosPublic = useAxiosPublic();
 
@@ -32,12 +32,12 @@ const SignUp = () => {
               name: data.name,
               email: data.email,
               photo: data.photoUrl,
+              // role: "student",
             };
-            axiosPublic.post("/users", userInfo)
-            .then(res => {
+            axiosPublic.post("/users", userInfo).then((res) => {
               console.log(res.data);
               if (res.data.insertedId) {
-                console.log('user added to the database' );
+                console.log("user added to the database");
                 reset();
                 Swal.fire({
                   position: "top-end",
