@@ -17,7 +17,7 @@ const Profile = () => {
   return (
     <div className="card flex h-screen justify-center">
       <div className="flex w-8/12 p-16 rounded-xl gap-6 shadow-xl mx-auto">
-        <div className="w-64 items-center mx-auto flex flex-col space-y-1 border-r-2 border-black">
+        <div className="w-64 items-center mx-auto space-y-1 border-r-2 border-black">
           <div className="avatar">
             <div className="w-24 rounded-full">
               <img src={user?.photoURL} />
@@ -34,7 +34,7 @@ const Profile = () => {
               <div className="badge badge-primary">Teacher</div>
             </>
           ) : (
-            <></>
+            <><div className="badge badge-primary">Student</div></>
           )}
         </div>
         <div className="divider"></div>
@@ -66,7 +66,7 @@ const Profile = () => {
               />
             </div>
             <div className="form-control justify-start w-52 mt-6">
-              <PrimaryBtn customClass={'btn-wide'} name={'Submit'}></PrimaryBtn>
+              <PrimaryBtn customClass={"btn-wide"} name={"Submit"}></PrimaryBtn>
             </div>
           </form>
         </div>

@@ -12,6 +12,10 @@ import UserHome from "../Pages/Dashboard/User/UserHome";
 import AdminHome from "../Pages/Dashboard/Admin/AdminHome";
 import TeacherHome from "../Pages/Dashboard/Teacher/TeacherHome";
 import Profile from "../Pages/Dashboard/Profile";
+import TeacherReq from "../Pages/Dashboard/Admin/TeacherReq";
+import AllUsers from "../Pages/Dashboard/Admin/AllUsers";
+import AdminRoute from "./AdminRoute";
+import TeacherRoute from "./TeacherRoute";
 
 export const router = createBrowserRouter([
   {
@@ -74,12 +78,20 @@ export const router = createBrowserRouter([
       // Teacher Dashboard
       {
         path: "teacher-home",
-        element: <TeacherHome></TeacherHome>,
+        element: <TeacherRoute><TeacherHome></TeacherHome></TeacherRoute> ,
       },
       // Admin Dashboard
       {
         path: "admin-home",
-        element: <AdminHome></AdminHome>,
+        element: <AdminRoute><AdminHome></AdminHome></AdminRoute>,
+      },
+      {
+        path: "teacher-requests",
+        element: <AdminRoute><TeacherReq></TeacherReq></AdminRoute> ,
+      },
+      {
+        path: "all-users",
+        element: <AdminRoute><AllUsers></AllUsers></AdminRoute> ,
       },
     ],
   },

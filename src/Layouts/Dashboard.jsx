@@ -19,14 +19,17 @@ const Dashboard = () => {
 
   const [isAdmin] = useAdmin();
   const [isTeacher] = useTeacher();
+  // #DFE1FB
 
   return (
     <div className="flex p-0">
       <div
         className={
           isAdmin
-            ? "min-h-screen bg-green-500  w-52 h-screen py-10"
-            : "min-h-screen bg-orange-400"
+            ? " bg-green-500  w-52 min-h-screen py-10"
+            : isTeacher
+            ? " bg-orange-400   w-52 min-h-screen py-10"
+            : "bg-[#DFE1FB]   w-52 min-h-screen py-10"
         }
       >
         {/* user avatar */}
@@ -35,10 +38,11 @@ const Dashboard = () => {
             <img src={user?.photoURL || "User.svg"} />
           </div>
           <h2 className="text-black p-2 text-xs uppercase">
-            Welcome Back {user.displayName.split(" ").slice(0, 1).join(" ")}
+            Welcome {user?.displayName ? user.displayName.split(" ").slice(0, 2).join(" ") : 'Back'}
           </h2>
         </div>
         <ul className="flex flex-col justify-between gap-4 px-10 text-sm">
+          {/* Admin Dashboard */}
           {isAdmin ? (
             <>
               <li>
@@ -47,13 +51,22 @@ const Dashboard = () => {
                   to={"admin-home"}
                 >
                   <FaHome />
+                  Admin Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={`flex font-semibold items-center gap-2`}
+                  to={"teacher-requests"}
+                >
+                  <FaHome />
                   Teacher Request
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   className={`flex font-semibold items-center gap-2`}
-                  to={"admin-home"}
+                  to={"all-users"}
                 >
                   <FaUsers />
                   Users
@@ -66,15 +79,6 @@ const Dashboard = () => {
                 >
                   <FaList />
                   All classes
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className={`flex font-semibold items-center gap-2`}
-                  to={"admin-home"}
-                >
-                  <FaHome />
-                  Admin Home
                 </NavLink>
               </li>
             </>
