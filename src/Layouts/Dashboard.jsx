@@ -31,7 +31,7 @@ const Dashboard = () => {
           isAdmin
             ? " bg-green-500  w-52 min-h-screen py-10"
             : isTeacher
-            ? " bg-orange-400   w-52 min-h-screen py-10"
+            ? " bg-[#FFF1E7]   w-52 min-h-screen py-10"
             : "bg-[#DFE1FB]   w-52 min-h-screen py-10"
         }
       >
@@ -73,7 +73,7 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   className={`flex font-semibold items-center gap-2`}
-                  to={"class-requests"}
+                  to={"classes"}
                 >
                   <FaList />
                   All Classes

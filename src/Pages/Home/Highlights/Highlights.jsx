@@ -45,10 +45,10 @@ const Highlights = () => {
         >
           {showHighlights.map((highlight) => (
             <SwiperSlide key={highlight._id}>
-              <div className="card bg-base-100 hover:shadow-[#EF5743]/50">
+              <div className="card flex flex-wrap bg-base-100">
                 <figure className="">
                   <img
-                    className="h-52"
+                    className="h-64"
                     src={highlight.banner_image}
                     alt="Shoes"
                   />
@@ -68,13 +68,8 @@ const Highlights = () => {
                       <p>${highlight.price}</p>
                     </div>
                   </div>
-                  <h2 className="card-title font-bold">{highlight.title}</h2>
-                  <p className="text-xs">
-                    {highlight.short_description
-                      .split(" ")
-                      .slice(0, 8)
-                      .join(" ")}
-                  </p>
+                  <h2 className="card-title text-sm font-bold">{highlight.title}</h2>
+                  <p className="text-xs">{highlight.short_description}</p>
 
                   <PrimaryBtn
                     link={`/all-classes/${highlight._id}`}

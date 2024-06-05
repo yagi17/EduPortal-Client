@@ -59,7 +59,13 @@ const MyClass = () => {
                   </span>
                 </td>
                 <th>
-                  <h2 className="text-xs font-normal">{myClass.status === 'approved' ? 'approved' : myClass.status}</h2>
+                  <h2 className=
+                  {myClass.status === 'approved' ?
+                  `text-xs badge font-normal bg-[#1DA678] py-3 text-white`:
+                  `text-xs badge font-normal bg-white`
+                  }>
+                    
+                    {myClass.status === 'approved' ? 'Approved' : "Pending"}</h2>
                 </th>
                 <th>
                   <Link to={`/dashboard/updateItem/${myClass._id}`}>

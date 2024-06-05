@@ -4,7 +4,7 @@ import bannerImg from "../../../assets/BannerImage.png";
 const Banner = () => {
 
   return (
-    <section className="hero min-h-screen bg-[#DFE1FB]">
+    <section className="hero max-h-screen pt-24 bg-[#DFE1FB]">
       <div className="hero-content flex-col lg:flex-row-reverse max-w-6xl">
         <img src={bannerImg} className="lg:max-w-2xl max-w-xs" />
         <div>

@@ -16,7 +16,8 @@ import AdminRoute from "./AdminRoute";
 import TeacherRoute from "./TeacherRoute";
 import AddClass from "../Pages/Dashboard/Teacher/AddClass";
 import MyClass from "../Pages/Dashboard/Teacher/MyClass";
-import ClassRequests from "../Pages/Dashboard/Admin/ClassRequests";
+import AllClass from "../Pages/Dashboard/Admin/AllClass";
+import ClassStats from "../Pages/Dashboard/Admin/ClassStats";
 
 export const router = createBrowserRouter([
   {
@@ -97,12 +98,17 @@ export const router = createBrowserRouter([
         element: <AdminRoute><TeacherReq></TeacherReq></AdminRoute> ,
       },
       {
-        path: "class-requests",
-        element: <AdminRoute><ClassRequests></ClassRequests></AdminRoute> ,
+        path: "classes",
+        element: <AdminRoute><AllClass></AllClass></AdminRoute> ,
       },
       {
         path: "all-users",
         element: <AdminRoute><AllUsers></AllUsers></AdminRoute> ,
+      },
+      {
+        path: `/dashboard/classes/stats/:id`,
+        element: <AdminRoute><ClassStats></ClassStats></AdminRoute> ,
+        loader: ({ params }) =>fetch(`/classes/${params.id}`),
       },
     ],
   },
