@@ -32,7 +32,7 @@ const TeachOn = () => {
     axiosSecure
       .post("/teacher-req", reqData)
       .then((res) => {
-        console.log("data send");
+        // console.log("data send");
         if (res.data.insertedId) {
           navigate("/dashboard");
           Swal.fire({

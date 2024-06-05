@@ -17,11 +17,7 @@ const Dashboard = () => {
   const { user, logOut } = useAuth();
   // console.log(user);
   const handleLogout = () => {
-    logOut()
-      .then(() => {})
-      .catch((error) => {
-        console.log(error);
-      });
+    logOut().then(() => {});
   };
 
   const [isAdmin] = useAdmin();
@@ -58,10 +54,10 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   className={`flex font-semibold items-center gap-2`}
-                  to={"admin-home"}
+                  to={"all-users"}
                 >
-                  <FaHome />
-                  Admin Home
+                  <FaUsers />
+                  Users
                 </NavLink>
               </li>
               <li>
@@ -73,19 +69,11 @@ const Dashboard = () => {
                   Teacher Request
                 </NavLink>
               </li>
+
               <li>
                 <NavLink
                   className={`flex font-semibold items-center gap-2`}
-                  to={"all-users"}
-                >
-                  <FaUsers />
-                  Users
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className={`flex font-semibold items-center gap-2`}
-                  to={"admin-home"}
+                  to={"class-requests"}
                 >
                   <FaList />
                   All Classes

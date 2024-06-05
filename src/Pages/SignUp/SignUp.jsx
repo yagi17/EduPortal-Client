@@ -4,9 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import SocialLogin from "../../Components/SocialLogin";
 
 const SignUp = () => {
-  const { createUser, updateUserProfile } = useAuth();
+  const { createUser, updateUserProfile, googleSignIn } = useAuth();
 
   const navigate = useNavigate();
 
@@ -22,38 +23,34 @@ const SignUp = () => {
   const onSubmit = (data) => {
     // console.log(data);
     createUser(data.email, data.password)
-      .then((result) => {
-        const loggedUser = result.user;
-        console.log(loggedUser);
-        updateUserProfile(data.name, data.photoUrl)
-          .then(() => {
-            // send to data base
-            const userInfo = {
-              name: data.name,
-              email: data.email,
-              photo: data.photoUrl,
-              // role: "student",
-            };
-            axiosPublic.post("/users", userInfo).then((res) => {
-              console.log(res.data);
-              if (res.data.insertedId) {
-                console.log("user added to the database");
-                reset();
-                Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title: `${data.name} Welcome`,
-                  showConfirmButton: false,
-                  timer: 2000,
-                });
-                navigate("/");
-              }
-            });
-          })
-          .catch((error) => console.log(error));
+      .then(() => {
+        // console.log(loggedUser);
+        updateUserProfile(data.name, data.photoUrl).then(() => {
+          // send to data base
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+            photo: data.photoUrl,
+          };
+          axiosPublic.post("/users", userInfo).then((res) => {
+            // console.log(res.data);
+            if (res.data.insertedId) {
+              // console.log("user added to the database");
+              reset();
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: `${data.name} Welcome`,
+                showConfirmButton: false,
+                timer: 2000,
+              });
+              navigate("/");
+            }
+          });
+        });
       })
       .catch((error) => {
-        console.error("Error creating user:", error.message);
+        // console.error("Error creating user:", error.message);
         if (error.code === "auth/email-already-in-use") {
           const Toast = Swal.mixin({
             toast: true,
@@ -123,11 +120,6 @@ const SignUp = () => {
                 placeholder="Photo Url"
                 className="input input-bordered"
               />
-              {/* {errors.photoUrl && (
-                  <span className="text-red-500 text-xs">
-                    Photo Url is required
-                  </span>
-                )} */}
             </div>
             <div className="form-control">
               <label className="label">
@@ -181,9 +173,7 @@ const SignUp = () => {
               </button>
             </div>
           </form>
-          <button className="mx-20 btn bg-white border-white hover:bg-white text-center">
-            <FcGoogle /> Google
-          </button>
+          <SocialLogin></SocialLogin>
           <p className="text-center pb-6">
             <small>
               Already have an account ?

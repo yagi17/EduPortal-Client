@@ -1,17 +1,16 @@
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import useAuth from "../../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
+import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
-const MyClass = () => {
-  const { user } = useAuth();
+const ClassRequests = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { data: myClasses = [], refetch } = useQuery({
-    queryKey: ["myClasses", user.email],
+  const { data: classes = [] } = useQuery({
+    queryKey: ["classes"],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/classes/user/${user.email}`);
+      const res = await axiosSecure.get("/classes");
       console.log(res.data);
       return res.data;
     },
@@ -20,8 +19,8 @@ const MyClass = () => {
   return (
     <>
       {/* <h2 className="text-center text-5xl font-bold">
-        {myClasses.length > 0 ? myClasses.length : "data not found"}
-      </h2> */}
+          {myClasses.length > 0 ? myClasses.length : "data not found"}
+        </h2> */}
 
       <div className="overflow-x-auto max-w-screen-lg  rounded-xl mx-auto mt-5">
         <table className="table">
@@ -30,6 +29,7 @@ const MyClass = () => {
             <tr className="bg-[#DFE1FB]">
               <th></th>
               <th>Class Details</th>
+              <th>Email</th>
               <th>Category</th>
               <th>Status</th>
               <th>Update</th>
@@ -37,7 +37,7 @@ const MyClass = () => {
             </tr>
           </thead>
           <tbody>
-            {myClasses.map((myClass, index) => (
+            {classes.map((myClass, index) => (
               <tr key={myClass._id}>
                 <th>{index + 1}</th>
                 <td>
@@ -55,23 +55,30 @@ const MyClass = () => {
                 </td>
                 <td>
                   <span className="badge badge-ghost badge-sm">
+                    {myClass.teacher_email}
+                  </span>
+                </td>
+                <td>
+                  <span className="badge badge-ghost badge-sm">
                     {myClass.category}
                   </span>
                 </td>
                 <th>
-                  <h2 className="text-xs font-normal">{myClass.status === 'approved' ? 'approved' : myClass.status}</h2>
+                  <h2 className="text-xs font-normal">
+                    {myClass.status === "approved"
+                      ? "approved"
+                      : myClass.status}
+                  </h2>
                 </th>
                 <th>
-                  <Link to={`/dashboard/updateItem/${myClass._id}`}>
-                    <button className="btn btn-md bg-[#D1A054] text-white border-0 shadow-none hover:bg-[#D1A054]">
-                      <FaEdit />
-                    </button>
-                  </Link>
+                  <button className="btn bg-[#1DA678] text-white text-3xl border-0 shadow-none hover:bg-[#1DA678]">
+                    <IoCheckmarkDoneCircleOutline />
+                  </button>
                 </th>
                 <th>
                   <button
                     //   onClick={() => handleDelete(item)}
-                    className="btn bg-red-700  text-white border-0 shadow-none hover:bg-red-700"
+                    className="btn bg-red-600  text-white border-0 shadow-none hover:bg-red-700"
                   >
                     <FaTrashAlt />
                   </button>
@@ -95,4 +102,4 @@ const MyClass = () => {
   );
 };
 
-export default MyClass;
+export default ClassRequests;

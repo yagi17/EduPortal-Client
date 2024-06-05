@@ -8,7 +8,7 @@ const Profile = () => {
   const { user } = useAuth();
   const [isAdmin] = useAdmin();
   const [isTeacher] = useTeacher();
-  console.log(user);
+  // console.log(user);
 
   const handleProfile = (e) => {
     e.preventDefault();

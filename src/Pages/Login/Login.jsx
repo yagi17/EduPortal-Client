@@ -3,6 +3,9 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import SocialLogin from "../../Components/SocialLogin";
 
 const Login = () => {
   const { signIn } = useAuth();
@@ -19,20 +22,20 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    signIn(data.email, data.password)
-    .then((res) => {
-      console.log(res.data);
+    signIn(data.email, data.password).then(() => {
+      // console.log(res.data);
       Swal.fire({
         position: "top-end",
         icon: "success",
-        title:  ` Glad To See You Again`,
+        title: ` Glad To See You Again`,
         showConfirmButton: false,
         timer: 2000,
       });
-      console.log(res);
-      navigate(naviGate)
+      // console.log(res);
+      navigate(naviGate);
     });
   };
+
 
   return (
     <>
@@ -91,12 +94,16 @@ const Login = () => {
                 </button>
               </div>
             </form>
-            <button className="mx-20 btn bg-white border-white hover:bg-white text-center">
+            {/* <button
+              onClick={handleGoogleSignIn}
+              className="mx-20 btn bg-white border-white hover:bg-white text-center"
+            >
               <FcGoogle /> Google
-            </button>
+            </button> */}
+            <SocialLogin></SocialLogin>
             <p className="text-center pb-6">
               <small>
-                Don't Have An Account?{" "}
+                Does Not Have An Account?{" "}
                 <Link className="text-blue-600" to={"/sign-up"}>
                   Create an account
                 </Link>

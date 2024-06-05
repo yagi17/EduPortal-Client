@@ -1,4 +1,3 @@
-import { CgProfile } from "react-icons/cg";
 import { IoLogInOutline, IoLogOutOutline } from "react-icons/io5";
 import { MdDashboard } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom";
@@ -11,9 +10,7 @@ const Navbar = () => {
   const handleLogout = () => {
     logOut()
       .then(() => {})
-      .catch((error) => {
-        console.log(error);
-      });
+
   };
 
   const links = (

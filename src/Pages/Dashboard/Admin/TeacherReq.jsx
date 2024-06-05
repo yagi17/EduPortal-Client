@@ -25,7 +25,7 @@ const TeacherReq = () => {
     }).then((res) => {
       if (res.isConfirmed) {
         axiosSecure.patch(`/users/${request.email}`).then((res) => {
-          console.log("User is teacher Now", res.data);
+          // console.log("User is teacher Now", res.data);
           if (res.data.modifiedCount > 0) {
             Swal.fire({
               position: "top",
