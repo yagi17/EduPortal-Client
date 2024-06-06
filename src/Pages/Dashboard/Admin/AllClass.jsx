@@ -43,6 +43,27 @@ const AllClass = () => {
 
   const handleDelete = (classInfo) => {
     console.log("Class Deleted", classInfo._id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSecure.delete(`classes/${classInfo._id}`);
+        if (res.data.deletedCount > 0) {
+          refetch();
+          Swal.fire({
+            title: "Deleted!",
+            text: `File has been removed`,
+            icon: "success",
+          });
+        }
+      }
+    });
   };
 
   return (

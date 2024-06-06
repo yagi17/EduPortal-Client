@@ -10,7 +10,7 @@ const AllClasses = () => {
     const [classes, setClasses] = useState([])
 
     useEffect(()=>{
-        axiosPublic.get('/classes')
+        axiosPublic.get('/classes/status/approved')
         .then(res=>{
             setClasses(res.data)
             // console.log(res.data);

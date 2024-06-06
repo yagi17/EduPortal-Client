@@ -11,7 +11,7 @@ const Highlights = () => {
   const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
-    axiosPublic.get("/classes").then((res) => {
+    axiosPublic.get("/classes/status/approved").then((res) => {
       setHighlights(res.data);
       // console.log(res.data);
     });
@@ -45,10 +45,10 @@ const Highlights = () => {
         >
           {showHighlights.map((highlight) => (
             <SwiperSlide key={highlight._id}>
-              <div className="card flex flex-wrap bg-base-100">
+              <div className="card flex max-h-full  flex-wrap bg-base-100">
                 <figure className="">
                   <img
-                    className="h-64"
+                    className="h-52"
                     src={highlight.banner_image}
                     alt="Shoes"
                   />
@@ -68,8 +68,17 @@ const Highlights = () => {
                       <p>${highlight.price}</p>
                     </div>
                   </div>
-                  <h2 className="card-title text-sm font-bold">{highlight.title}</h2>
-                  <p className="text-xs">{highlight.short_description}</p>
+                  <h2 className="card-title text-sm font-bold">
+                    {highlight.title}
+                  </h2>
+                  <p className="text-xs">
+                    {highlight.short_description
+                      .split(" ")
+                      .slice(0, 12)
+                      .join(" ")}
+                    {highlight.short_description.split(" ").length > 12 &&
+                      "..."}
+                  </p>
 
                   <PrimaryBtn
                     link={`/all-classes/${highlight._id}`}

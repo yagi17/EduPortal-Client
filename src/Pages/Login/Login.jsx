@@ -33,6 +33,40 @@ const Login = () => {
       });
       // console.log(res);
       navigate(naviGate);
+    })
+    .catch((error) => {
+      // console.log(error);
+      if (error.message === "Firebase: Error (auth/invalid-credential).") {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+
+        });
+        Toast.fire({
+          icon: "error",
+          title: "Invalid Email / Password"
+        });
+      }
+      if (
+        error.message ===
+        "Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests)."
+      ) {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+        });
+        Toast.fire({
+          icon: "error",
+          title: "Too many requests, try again letter"
+        });
+      }
+      reset()
     });
   };
 

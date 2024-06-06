@@ -117,7 +117,7 @@ const AddClass = () => {
             <div className="form-control w-full">
               <label className="label">
                 <span className="label-text font-semibold text-xs">
-                  Select A Category
+                  Select a Category
                 </span>
               </label>
               <select

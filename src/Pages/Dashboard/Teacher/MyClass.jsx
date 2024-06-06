@@ -3,6 +3,7 @@ import useAuth from "../../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MyClass = () => {
   const { user } = useAuth();
@@ -11,18 +12,41 @@ const MyClass = () => {
   const { data: myClasses = [], refetch } = useQuery({
     queryKey: ["myClasses", user.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/classes/user/${user.email}`);
-      console.log(res.data);
+      const res = await axiosSecure.get(`/classes/teacher/${user.email}`);
+      // console.log(res.data);
       return res.data;
     },
   });
 
+  const handleDelete = (myClass) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/classes/teacher/${user.email}&${myClass._id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              refetch();
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+            }
+          });
+      }
+    });
+  };
+
   return (
     <>
-      {/* <h2 className="text-center text-5xl font-bold">
-        {myClasses.length > 0 ? myClasses.length : "data not found"}
-      </h2> */}
-
       <div className="overflow-x-auto max-w-screen-lg  rounded-xl mx-auto mt-5">
         <table className="table">
           {/* head */}
@@ -59,16 +83,20 @@ const MyClass = () => {
                   </span>
                 </td>
                 <th>
-                  <h2 className=
-                  {myClass.status === 'approved' ?
-                  `text-xs badge font-normal bg-[#1DA678] py-3 text-white`:
-                  `text-xs badge font-normal bg-white`
-                  }>
-                    
-                    {myClass.status === 'approved' ? 'Approved' : "Pending"}</h2>
+                  <h2
+                    className={
+                      myClass.status === "approved"
+                        ? `text-xs badge font-normal bg-[#1DA678] py-3 text-white`
+                        : `text-xs badge font-normal bg-white`
+                    }
+                  >
+                    {myClass.status === "approved" ? "Approved" : "Pending"}
+                  </h2>
                 </th>
                 <th>
-                  <Link to={`/dashboard/updateItem/${myClass._id}`}>
+                  <Link
+                    to={`/dashboard/my-classes/${myClass._id}`}
+                  >
                     <button className="btn btn-md bg-[#D1A054] text-white border-0 shadow-none hover:bg-[#D1A054]">
                       <FaEdit />
                     </button>
@@ -76,7 +104,7 @@ const MyClass = () => {
                 </th>
                 <th>
                   <button
-                    //   onClick={() => handleDelete(item)}
+                    onClick={() => handleDelete(myClass)}
                     className="btn bg-red-700  text-white border-0 shadow-none hover:bg-red-700"
                   >
                     <FaTrashAlt />

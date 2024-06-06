@@ -24,19 +24,19 @@ const Dashboard = () => {
   const [isTeacher] = useTeacher();
   // #DFE1FB
 
-  return (
-    <div className="flex p-0">
+  const dashboardLinks = (
+    <>
       <div
         className={
           isAdmin
-            ? " bg-green-500  w-52 min-h-screen py-10"
+            ? " bg-green-500 sticky w-52 min-h-screen py-10"
             : isTeacher
-            ? " bg-[#FFF1E7]   w-52 min-h-screen py-10"
-            : "bg-[#DFE1FB]   w-52 min-h-screen py-10"
+            ? " bg-[#FFF1E7] w-52 min-h-screen py-10"
+            : "bg-[#DFE1FB] w-52 min-h-screen py-10"
         }
       >
         {/* user avatar */}
-        <div className="avatar mx-auto w-full text-center flex-col">
+        <div className="avatar mx-auto w-full text-center  flex-col">
           <div className="w-24 mx-auto rounded-full">
             <img src={user?.photoURL || "User.svg"} />
           </div>
@@ -146,7 +146,45 @@ const Dashboard = () => {
           </li>
         </ul>
       </div>
-      <div className="flex-1">
+    </>
+  );
+
+  return (
+    <div className="flex p-0">
+      <div className="drawer z-50 h-screen  lg:hidden">
+        <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-content">
+          {/* Page content here */}
+          <label htmlFor="my-drawer" className="p-10 drawer-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </label>
+        </div>
+        <div className="drawer-side">
+          <label
+            htmlFor="my-drawer"
+            aria-label="close sidebar"
+            className="drawer-overlay"
+          ></label>
+          {dashboardLinks}
+        </div>
+      </div>
+      <div className="dashboard-links-container fixed top-0 left-0 h-screen overflow-y-auto z-50">
+        {dashboardLinks}
+      </div>
+      <div className="flex-1 ml-10">
         <Outlet></Outlet>
       </div>
     </div>
