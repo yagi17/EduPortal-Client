@@ -123,20 +123,15 @@ const AllClass = () => {
                   </h2>
                 </th>
                 <th>
-                  {classInfo.status === "approved" ? (
-                    <Link to={`stats/${classInfo._id}`}>
-                      <button className="btn btn-xs bg-[#1DA678] text-white border-0 shadow-none hover:bg-[#1DA678]">
-                        Progress
-                      </button>
-                    </Link>
-                  ) : (
+
                     <button
+                    disabled={classInfo.status === "approved"}
                       onClick={() => handleApprove(classInfo)}
                       className="btn bg-[#1DA678] text-white text-3xl border-0 shadow-none hover:bg-[#1DA678]"
                     >
                       <IoCheckmarkDoneCircleOutline />
                     </button>
-                  )}
+                  
                 </th>
                 <th>
                   <button

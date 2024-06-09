@@ -18,6 +18,8 @@ const MyClass = () => {
     },
   });
 
+  
+
   const handleDelete = (myClass) => {
     Swal.fire({
       title: "Are you sure?",
@@ -87,16 +89,22 @@ const MyClass = () => {
                     className={
                       myClass.status === "approved"
                         ? `text-xs badge font-normal bg-[#1DA678] py-3 text-white`
-                        : `text-xs badge font-normal bg-white`
+                        : `text-xs badge font-normal bg-red-200 text-red-800`
                     }
                   >
-                    {myClass.status === "approved" ? "Approved" : "Pending"}
+                    {myClass.status === "approved" ? (
+                      <Link to={`/dashboard/my-class/details/${myClass?._id}`}>
+                        <button className="text-white border-0 shadow-none">
+                          View Details
+                        </button>
+                      </Link>
+                    ) : (
+                      "Pending"
+                    )}
                   </h2>
                 </th>
                 <th>
-                  <Link
-                    to={`/dashboard/my-classes/${myClass._id}`}
-                  >
+                  <Link to={`/dashboard/my-classes/${myClass?._id}`}>
                     <button className="btn btn-md bg-[#D1A054] text-white border-0 shadow-none hover:bg-[#D1A054]">
                       <FaEdit />
                     </button>

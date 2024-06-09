@@ -1,6 +1,6 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import PrimaryBtn from "../../Components/PrimaryBtn";
-import useAuth from "../../Hooks/useAuth";
+
 
 const ClassDetails = () => {
   const {

@@ -40,6 +40,7 @@ const AddClass = () => {
         price: data.price,
         category: data.category,
         short_description: data.description,
+        enrolledStudent: 0,
         status: 'pending'
       };
       console.log(classInfo);

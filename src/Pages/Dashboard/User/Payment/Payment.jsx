@@ -5,35 +5,36 @@ import { loadStripe } from "@stripe/stripe-js";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import useAuth from "../../../../Hooks/useAuth";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_PK);
 
 const CheckoutForm = () => {
   const { id } = useParams();
+  console.log(id);
   const { user } = useAuth();
   const stripe = useStripe();
   const axiosSecure = useAxiosSecure();
   const elements = useElements();
   const [error, setError] = useState([]);
-  const [transactionId, setTransactionId] = useState([]);
   const [loading, setLoading] = useState(false);
   const [classInfo, setClassInfo] = useState([]);
+  const [enrolledStudent, setEnrolledStudent] = useState([]);
   const [clientSecret, setClientSecret] = useState([]);
   const price = classInfo.price;
-
-  const navigate = useNavigate()
-  // console.log(user);
+  const navigate = useNavigate();
 
   const localDate = new Date();
   const year = localDate.getUTCFullYear();
-  const month = String(localDate.getUTCMonth() + 1).padStart(2, "0"); // Months are 0-indexed
+  const month = String(localDate.getUTCMonth() + 1).padStart(2, "0");
   const day = String(localDate.getUTCDate()).padStart(2, "0");
   const hours = String(localDate.getUTCHours()).padStart(2, "0");
   const minutes = String(localDate.getUTCMinutes()).padStart(2, "0");
   const seconds = String(localDate.getUTCSeconds()).padStart(2, "0");
   const utcDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+  const count = enrolledStudent;
 
   useEffect(() => {
     axiosSecure.post("/create-payment-intent", { price: price }).then((res) => {
@@ -45,6 +46,7 @@ const CheckoutForm = () => {
   useEffect(() => {
     axiosSecure.get(`/classes/${id}`).then((res) => {
       setClassInfo(res.data);
+      setEnrolledStudent(res.data.enrolledStudent);
     });
   }, [axiosSecure, id]);
 
@@ -89,28 +91,36 @@ const CheckoutForm = () => {
     } else {
       console.log("Payment intent", paymentIntent);
       if (paymentIntent.status === "succeeded") {
-        // console.log("transaction id", paymentIntent.id);
-        setTransactionId(paymentIntent.id);
-        const payment = {
-          email: user.email,
-          price: price,
-          transactionId: paymentIntent.id,
-          date: utcDateTime, //utc data convert . use moment js to convert in utc
-        };
-        console.log("payment info", payment);
-        axiosSecure.post("/payments", payment).then((res) => {
-          console.log(res.data);
-          if (res.data.insertedId) {
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Payment was successful",
-              showConfirmButton: false,
-              timer: 2000,
-            });
-            navigate("/dashboard/my-enrolled-class");
-          }
-        });
+        let updatedCount = count + 1;
+        axiosSecure
+          .patch(`/enrolled/classes/${id}`, { enrolledStudent: parseInt(updatedCount) })
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.modifiedCount > 0) {
+              const payment = {
+                email: user.email,
+                classId: classInfo._id,
+                price: price,
+                classData: classInfo,
+                transactionId: paymentIntent.id,
+                date: utcDateTime, //utc data convert . use moment js to convert in utc
+              };
+              console.log("payment info", payment);
+              axiosSecure.post("/enrollments", payment).then((res) => {
+                console.log(res.data);
+                if (res.data.insertedId) {
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    text: "Payment successful",
+                    showConfirmButton: false,
+                    timer: 2000,
+                  });
+                  navigate("/dashboard/my-enrolled-class");
+                }
+              });
+            }
+          });
       }
     }
   };
@@ -139,7 +149,7 @@ const CheckoutForm = () => {
             </label>
             <input
               type="email"
-              defaultValue={user?.email || ''}
+              defaultValue={user?.email || ""}
               readOnly
               className="w-full p-2 border border-black rounded"
             />

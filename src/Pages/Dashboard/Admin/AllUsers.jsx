@@ -11,10 +11,11 @@ const AllUsers = () => {
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
-        console.log(res.data);
+      console.log(res.data);
       return res.data;
     },
   });
+  console.log(users);
 
   const handleAdmin = (userInfo) => {
     console.log(userInfo.email);
@@ -61,73 +62,55 @@ const AllUsers = () => {
 
   return (
     <>
-      <div className="overflow-x-auto w-9/12 text-black rounded-xl mx-auto mt-5">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr className="bg-[#DFE1FB]">
-              <th></th>
-              <th>Class Details</th>
-              <th>Role</th>
-              <th className="w-fit">Action</th>
+      <table className="w-[700px] mt-10 mx-auto divide-y divide-gray-200">
+        <thead>
+          <tr className="bg-gray-400 text-white items-center rounded-t-xl">
+            <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider justify-center items-center">NO</th>
+            <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+              Name
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+              Email
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+              Role
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody className="bg-white divide-y divide-gray-200">
+          {users.map((usersInfo, index) => (
+            <tr key={usersInfo._id}>
+              <th className="px-6 py-4 h-full whitespace-nowrap  justify-center items-center">{index + 1}</th>
+              <td className="px-6 font-semibold py-4 whitespace-nowrap">{usersInfo.name}</td>
+              <td className="px-6 font-semibold py-4 whitespace-nowrap">{usersInfo.email}</td>
+              <td className="px-6 py-4 whitespace-nowrap capitalize">
+                <span
+                  className={
+                    usersInfo.role === "admin"
+                      ? "px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800"
+                      : usersInfo.role === "teacher"
+                      ? "px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800"
+                      : "px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                  }
+                >
+                   {usersInfo.role ? usersInfo.role : "student"}
+                </span>
+              </td>
+              <td className="py-4 w-fit whitespace-nowrap">
+                <button 
+                disabled={usersInfo.role === "admin"}
+                onClick={() => handleAdmin(usersInfo)}
+                className=" btn font-medium text-white bg-[#1DA678] rounded-md hover:bg-[#1DA678] focus:outline-none focus:shadow-outline-red active:bg-[#1DA678] transition duration-150 ease-in-out">
+                  Make Admin
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {users.map((usersInfo, index) => (
-              <tr key={usersInfo._id}>
-                <th>{index + 1}</th>
-                <td>
-                  <div className="flex items-center gap-3">
-                    <div>
-                      <div className="font-bold">{usersInfo.name}</div>
-                      <div className="text-sm">{usersInfo.email}</div>
-                    </div>
-                  </div>
-                </td>
-                <th>
-                  <h2
-                    className={
-                      usersInfo.role === "admin"
-                        ? `text-xs badge font-normal bg-[#1DA678] py-3 text-white`
-                        : usersInfo.role === "teacher"
-                        ? `text-xs badge font-normal bg-[#FFF1E7]`
-                        : `text-xs badge font-normal bg-white`
-                    }
-                  >
-                    {usersInfo.role ? usersInfo.role : "student"}
-                  </h2>
-                </th>
-                <th className="w-40">
-                  {usersInfo.status === "approved" ? (
-                    <Link to={`stats/${usersInfo._id}`}>
-                      <button className="btn btn-xs bg-[#1DA678] text-white border-0 shadow-none hover:bg-[#1DA678]">
-                        Progress
-                      </button>
-                    </Link>
-                  ) : (
-                    <button
-                      disabled={usersInfo.role === "admin"}
-                      onClick={() => handleAdmin(usersInfo)}
-                      className="btn bg-[#1DA678] text-white border-0 shadow-none hover:bg-[#1DA678]"
-                    >
-                      <span className="text-xs">Make Admin</span>{" "}
-                      <GrUserAdmin />
-                    </button>
-                  )}
-                </th>
-              </tr>
-            ))}
-          </tbody>
-          <tfoot className="bg-[#DFE1FB] rounded-t-xl">
-            <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 };

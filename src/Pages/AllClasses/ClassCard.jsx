@@ -31,7 +31,18 @@ const ClassCard = ({ classes }) => {
           </div>
         </div>
         <h2 className="card-title font-bold">{title}</h2>
-        <p className="text-xs">{short_description}</p>
+        <p className="text-xs">        {short_description
+                      .split(" ")
+                      .slice(0, 20)
+                      .join(" ")}
+                    {short_description.split(" ").length > 12 &&
+                      ".........."}</p>
+        {/* {highlight.short_description
+                      .split(" ")
+                      .slice(0, 12)
+                      .join(" ")}
+                    {highlight.short_description.split(" ").length > 12 &&
+                      "..."} */}
         <PrimaryBtn link={`/all-classes/${_id}`} name={"View Class Details"} customClass={"w-full"}></PrimaryBtn>
       </div>
     </div>

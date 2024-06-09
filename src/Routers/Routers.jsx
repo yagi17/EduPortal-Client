@@ -20,11 +20,15 @@ import ClassStats from "../Pages/Dashboard/Admin/ClassStats";
 import UpdateClass from "../Pages/Dashboard/Teacher/UpdateClass";
 import MyEnrollClass from "../Pages/Dashboard/User/MyEnrollClass";
 import Payment from "../Pages/Dashboard/User/Payment/Payment";
+import MyEnrollClassDetails from "../Pages/Dashboard/User/MyEnrollClassDetails ";
+import ErrorPage from "../Shared/ErrorPage";
+import MyClassDetails from "../Pages/Dashboard/Teacher/MyClassDetails";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -62,18 +66,20 @@ export const router = createBrowserRouter([
       },
       {
         path: "/:id/payment",
-        element:<Payment></Payment>,
+        element:<PrivateRoute><Payment></Payment></PrivateRoute>,
         
       },
     ],
   },
   {
     path: "/dashboard",
+
     element: (
       <PrivateRoute>
         <Dashboard></Dashboard>
       </PrivateRoute>
     ),
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/dashboard",
@@ -86,6 +92,10 @@ export const router = createBrowserRouter([
         path: "my-enrolled-class",
         element:<MyEnrollClass></MyEnrollClass>,
       },
+      {
+        path: `/dashboard/myEnroll-class/:id`,
+        element:<MyEnrollClassDetails></MyEnrollClassDetails>,
+      },
 
       // ---------- Teacher Dashboard ---------- //
 
@@ -96,6 +106,10 @@ export const router = createBrowserRouter([
       {
         path: "my-classes",
         element: <TeacherRoute><MyClass></MyClass></TeacherRoute> ,
+      },
+      {
+        path: `/dashboard/my-class/details/:id`,
+        element: <TeacherRoute><MyClassDetails></MyClassDetails></TeacherRoute> ,
       },
       {
         path: `/dashboard/my-classes/:id`,
