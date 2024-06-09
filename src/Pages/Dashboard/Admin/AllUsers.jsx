@@ -11,7 +11,7 @@ const AllUsers = () => {
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
-      //   console.log(res.data);
+        console.log(res.data);
       return res.data;
     },
   });
@@ -27,7 +27,8 @@ const AllUsers = () => {
       confirmButtonText: "Confirm",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.patch(`/users/admin/${userInfo._id}`)
+        axiosSecure
+          .patch(`/users/admin/${userInfo._id}`)
           .then((response) => {
             if (response.data.modifiedCount > 0) {
               // Request successful, show appropriate message
@@ -57,20 +58,18 @@ const AllUsers = () => {
       }
     });
   };
-  
 
   return (
     <>
-      <div className="overflow-x-auto max-w-screen-lg text-black rounded-xl mx-auto mt-5">
+      <div className="overflow-x-auto w-9/12 text-black rounded-xl mx-auto mt-5">
         <table className="table">
           {/* head */}
           <thead>
             <tr className="bg-[#DFE1FB]">
               <th></th>
               <th>Class Details</th>
-              <th>Email</th>
               <th>Role</th>
-              <th>Make Admin</th>
+              <th className="w-fit">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -79,21 +78,11 @@ const AllUsers = () => {
                 <th>{index + 1}</th>
                 <td>
                   <div className="flex items-center gap-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle w-12 h-12">
-                        {/* <img src={usersInfo.banner_image} alt="" /> */}
-                      </div>
-                    </div>
                     <div>
-                      <div className="font-bold">{usersInfo.title}</div>
+                      <div className="font-bold">{usersInfo.name}</div>
                       <div className="text-sm">{usersInfo.email}</div>
                     </div>
                   </div>
-                </td>
-                <td>
-                  <span className="badge badge-ghost badge-sm">
-                    {usersInfo.email}
-                  </span>
                 </td>
                 <th>
                   <h2
@@ -108,7 +97,7 @@ const AllUsers = () => {
                     {usersInfo.role ? usersInfo.role : "student"}
                   </h2>
                 </th>
-                <th>
+                <th className="w-40">
                   {usersInfo.status === "approved" ? (
                     <Link to={`stats/${usersInfo._id}`}>
                       <button className="btn btn-xs bg-[#1DA678] text-white border-0 shadow-none hover:bg-[#1DA678]">
@@ -131,7 +120,6 @@ const AllUsers = () => {
           </tbody>
           <tfoot className="bg-[#DFE1FB] rounded-t-xl">
             <tr>
-              <th></th>
               <th></th>
               <th></th>
               <th></th>

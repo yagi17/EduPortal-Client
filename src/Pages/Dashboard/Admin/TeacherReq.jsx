@@ -24,7 +24,7 @@ const TeacherReq = () => {
       confirmButtonText: "Yes, Confirm it!",
     }).then((res) => {
       if (res.isConfirmed) {
-        axiosSecure.patch(`/users/${request.email}`).then((res) => {
+        axiosSecure.patch(`/users/teacher/${request.email}`).then((res) => {
           // console.log("User is teacher Now", res.data);
           if (res.data.modifiedCount > 0) {
             Swal.fire({

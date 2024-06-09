@@ -102,7 +102,17 @@ const Dashboard = () => {
               </li>
             </>
           ) : (
-            <>this is user</>
+            <>
+              <li>
+                <NavLink
+                  className={`flex font-semibold items-center gap-2`}
+                  to={"my-enrolled-class"}
+                >
+                  <FaRegFileAlt />
+                  My Enroll Class
+                </NavLink>
+              </li>
+            </>
           )}
 
           <li>
@@ -150,12 +160,43 @@ const Dashboard = () => {
   );
 
   return (
-    <div className="flex p-0">
-      <div className="drawer z-50 h-screen  lg:hidden">
-        <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
-          {/* Page content here */}
-          <label htmlFor="my-drawer" className="p-10 drawer-button">
+    <div className="lg:flex p-0">
+      <div className="navbar bg-base-100 lg:hidden flex">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h7"
+                />
+              </svg>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm bg- dropdown-content mt-3 z-[1] shadow bg-base-100 rounded-box"
+            >
+              {dashboardLinks}
+            </ul>
+          </div>
+        </div>
+        <div className="navbar-center">
+          <a className="btn btn-ghost text-xl">Dashboard</a>
+        </div>
+        <div className="navbar-end">
+          <button className="btn btn-ghost btn-circle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -167,24 +208,36 @@ const Dashboard = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
             </svg>
-          </label>
-        </div>
-        <div className="drawer-side">
-          <label
-            htmlFor="my-drawer"
-            aria-label="close sidebar"
-            className="drawer-overlay"
-          ></label>
-          {dashboardLinks}
+          </button>
+          <button className="btn btn-ghost btn-circle">
+            <div className="indicator">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                />
+              </svg>
+              <span className="badge badge-xs badge-primary indicator-item"></span>
+            </div>
+          </button>
         </div>
       </div>
-      <div className="dashboard-links-container fixed top-0 left-0 h-screen overflow-y-auto z-50">
+
+      <div className="dashboard-links-container hidden lg:flex scr top-0 left-0 min-h-screen overflow-y-auto z-50">
         {dashboardLinks}
       </div>
-      <div className="flex-1 ml-10">
+      <div className="flex-1 lg:ml-10">
         <Outlet></Outlet>
       </div>
     </div>

@@ -48,7 +48,7 @@ const MyClass = () => {
   return (
     <>
       <div className="overflow-x-auto max-w-screen-lg  rounded-xl mx-auto mt-5">
-        <table className="table">
+        <table className="table max-w-screen-md">
           {/* head */}
           <thead>
             <tr className="bg-[#DFE1FB]">

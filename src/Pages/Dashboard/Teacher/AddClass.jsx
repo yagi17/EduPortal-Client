@@ -58,7 +58,7 @@ const AddClass = () => {
   };
 
   const [text, setText] = useState("");
-  const maxLength = 300;
+  const maxLength = 350;
 
   const handleChange = (event) => {
     setText(event.target.value);
@@ -150,6 +150,7 @@ const AddClass = () => {
               </label>
               <input
                 type="number"
+                step="0.01"
                 {...register("price", { required: true })}
                 placeholder="Price"
                 className="input input-bordered"

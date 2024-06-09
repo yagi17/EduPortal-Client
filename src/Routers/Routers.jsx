@@ -8,7 +8,6 @@ import ClassDetails from "../Pages/AllClasses/ClassDetails";
 import PrivateRoute from "./PrivateRoute";
 import TeachOn from "../Pages/TeachOn/TeachOn";
 import Dashboard from "../Layouts/Dashboard";
-import UserHome from "../Pages/Dashboard/User/UserHome";
 import Profile from "../Pages/Dashboard/Profile";
 import TeacherReq from "../Pages/Dashboard/Admin/TeacherReq";
 import AllUsers from "../Pages/Dashboard/Admin/AllUsers";
@@ -19,6 +18,8 @@ import MyClass from "../Pages/Dashboard/Teacher/MyClass";
 import AllClass from "../Pages/Dashboard/Admin/AllClass";
 import ClassStats from "../Pages/Dashboard/Admin/ClassStats";
 import UpdateClass from "../Pages/Dashboard/Teacher/UpdateClass";
+import MyEnrollClass from "../Pages/Dashboard/User/MyEnrollClass";
+import Payment from "../Pages/Dashboard/User/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +60,11 @@ export const router = createBrowserRouter([
         path: "/sign-up",
         element: <SignUp></SignUp>,
       },
+      {
+        path: "/:id/payment",
+        element:<Payment></Payment>,
+        
+      },
     ],
   },
   {
@@ -77,8 +83,8 @@ export const router = createBrowserRouter([
       // ---------- User Dashboard ---------- //
 
       {
-        path: "user-home",
-        element: <UserHome></UserHome>,
+        path: "my-enrolled-class",
+        element:<MyEnrollClass></MyEnrollClass>,
       },
 
       // ---------- Teacher Dashboard ---------- //

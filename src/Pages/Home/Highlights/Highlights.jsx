@@ -38,14 +38,14 @@ const Highlights = () => {
             426: {
               slidesPerView: 2,
             },
-            768: {
+            769: {
               slidesPerView: 4,
             },
           }}
         >
           {showHighlights.map((highlight) => (
             <SwiperSlide key={highlight._id}>
-              <div className="card flex max-h-full  flex-wrap bg-base-100">
+              <div className="card flex max-h-full flex-wrap bg-base-100">
                 <figure className="">
                   <img
                     className="h-52"
@@ -82,7 +82,7 @@ const Highlights = () => {
 
                   <PrimaryBtn
                     link={`/all-classes/${highlight._id}`}
-                    name={"Enroll"}
+                    name={"View Class Details"}
                     customClass={"w-full"}
                   ></PrimaryBtn>
                 </div>

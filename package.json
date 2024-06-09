@@ -12,6 +12,8 @@
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
     "@smastrom/react-rating": "^1.5.0",
+    "@stripe/react-stripe-js": "^2.7.1",
+    "@stripe/stripe-js": "^3.5.0",
     "@tanstack/react-query": "^5.40.0",
     "axios": "^1.7.2",
     "firebase": "^10.12.2",

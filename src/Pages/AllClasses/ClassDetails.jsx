@@ -1,5 +1,6 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import PrimaryBtn from "../../Components/PrimaryBtn";
+import useAuth from "../../Hooks/useAuth";
 
 const ClassDetails = () => {
   const {
@@ -12,7 +13,7 @@ const ClassDetails = () => {
     short_description,
     total_enrolment,
   } = useLoaderData();
-  // console.log(banner_image);
+
 
   return (
     <div
@@ -28,7 +29,9 @@ const ClassDetails = () => {
           <p className="mb-5 mx-auto max-w-xl">{short_description}</p>
           <div className="grid grid-cols-2">
             <div className="text-end border-r-2 px-4 font-bold">
-              <p className="text-[#F9D423]">{total_enrolment} already registered</p>
+              <p className="text-[#F9D423]">
+                {total_enrolment} already registered
+              </p>
               <p>${price}</p>
             </div>
             <div className="flex items-center gap-6 border-l-2  px-4">
@@ -43,7 +46,12 @@ const ClassDetails = () => {
               </div>
             </div>
           </div>
-          <PrimaryBtn customClass={"btn-wide"} name={"ENROLL NOW"}></PrimaryBtn>
+          <PrimaryBtn
+            link={`/${_id}/payment`}
+            // fnc={handleEnroll}
+            customClass={"btn-wide"}
+            name={"ENROLL NOW"}
+          ></PrimaryBtn>
         </div>
       </div>
     </div>
