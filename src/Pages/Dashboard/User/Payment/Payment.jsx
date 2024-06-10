@@ -12,7 +12,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_PK);
 
 const CheckoutForm = () => {
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
   const { user } = useAuth();
   const stripe = useStripe();
   const axiosSecure = useAxiosSecure();
@@ -38,7 +38,7 @@ const CheckoutForm = () => {
 
   useEffect(() => {
     axiosSecure.post("/create-payment-intent", { price: price }).then((res) => {
-      console.log(res.data.clientSecret);
+      // console.log(res.data.clientSecret);
       setClientSecret(res.data.clientSecret);
     });
   }, [axiosSecure, price]);
@@ -68,10 +68,10 @@ const CheckoutForm = () => {
       card,
     });
     if (error) {
-      console.log("Payment Error", error);
+      // console.log("Payment Error", error);
       setError(error.message);
     } else {
-      console.log("Payment Method", paymentMethod);
+      // console.log("Payment Method", paymentMethod);
       setError("");
     }
     // Confirm payment
@@ -87,15 +87,15 @@ const CheckoutForm = () => {
         },
       });
     if (confirmError) {
-      console.log(confirmError);
+      // console.log(confirmError);
     } else {
-      console.log("Payment intent", paymentIntent);
+      // console.log("Payment intent", paymentIntent);
       if (paymentIntent.status === "succeeded") {
         let updatedCount = count + 1;
         axiosSecure
           .patch(`/enrolled/classes/${id}`, { enrolledStudent: parseInt(updatedCount) })
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data.modifiedCount > 0) {
               const payment = {
                 email: user.email,
@@ -105,9 +105,9 @@ const CheckoutForm = () => {
                 transactionId: paymentIntent.id,
                 date: utcDateTime, //utc data convert . use moment js to convert in utc
               };
-              console.log("payment info", payment);
+              // console.log("payment info", payment);
               axiosSecure.post("/enrollments", payment).then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 if (res.data.insertedId) {
                   Swal.fire({
                     position: "top-end",

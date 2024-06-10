@@ -27,7 +27,7 @@ const MyClassDetails = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log("This data is assignment");
+    // console.log("This data is assignment");
 
     const assignmentDetails = {
       classID: id,
@@ -36,7 +36,7 @@ const MyClassDetails = () => {
       assignmentDescription: data?.description,
       assignmentSubmission: "0",
     };
-    console.log(assignmentDetails);
+    // console.log(assignmentDetails);
 
     axiosSecure.post("/assignments", assignmentDetails).then((res) => {
       //   console.log(res.data);

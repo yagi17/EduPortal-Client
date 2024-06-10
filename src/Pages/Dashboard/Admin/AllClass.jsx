@@ -42,7 +42,7 @@ const AllClass = () => {
   };
 
   const handleDelete = (classInfo) => {
-    console.log("Class Deleted", classInfo._id);
+    // console.log("Class Deleted", classInfo._id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",

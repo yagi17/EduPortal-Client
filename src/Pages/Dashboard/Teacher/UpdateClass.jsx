@@ -11,7 +11,7 @@ const UpdateClass = () => {
   const axiosSecure = useAxiosSecure();
 
   const [classInfo, setClassInfo] = useState([]);
-  console.log(classInfo.category);
+  // console.log(classInfo.category);
 
   const { _id } = useLoaderData();
 

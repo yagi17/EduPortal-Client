@@ -13,7 +13,7 @@ const MyEnrollClass = () => {
     queryKey: ["enrollments"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/enrollments/${user?.email}`);
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     },
   });

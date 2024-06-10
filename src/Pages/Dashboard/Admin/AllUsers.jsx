@@ -11,14 +11,14 @@ const AllUsers = () => {
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     },
   });
-  console.log(users);
+  // console.log(users);
 
   const handleAdmin = (userInfo) => {
-    console.log(userInfo.email);
+    // console.log(userInfo.email);
     Swal.fire({
       text: "Are You Sure You Want To Give Permission To The User",
       icon: "warning",
@@ -33,7 +33,7 @@ const AllUsers = () => {
           .then((response) => {
             if (response.data.modifiedCount > 0) {
               // Request successful, show appropriate message
-              console.log("User is admin now", response.data);
+              // console.log("User is admin now", response.data);
               refetch();
               Swal.fire({
                 text: "User is now an admin",
@@ -41,7 +41,7 @@ const AllUsers = () => {
               });
             } else {
               // Request succeeded but no documents were modified
-              console.log("User is not an admin");
+              // console.log("User is not an admin");
               Swal.fire({
                 text: "User couldn't be made admin",
                 icon: "error",

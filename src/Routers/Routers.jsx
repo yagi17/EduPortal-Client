@@ -54,7 +54,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/classes/${params.id}`),
+          fetch(`https://edu-portal-server.vercel.app/classes/${params.id}`),
       },
       {
         path: "/login",
@@ -115,7 +115,7 @@ export const router = createBrowserRouter([
         path: `/dashboard/my-classes/:id`,
         element: <TeacherRoute><UpdateClass></UpdateClass> </TeacherRoute> ,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/classes/${params.id}`),
+          fetch(`https://edu-portal-server.vercel.app/classes/${params.id}`),
       },
 
       // ---------- Admin Dashboard ---------- //

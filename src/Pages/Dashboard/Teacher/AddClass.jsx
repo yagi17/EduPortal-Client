@@ -43,10 +43,10 @@ const AddClass = () => {
         enrolledStudent: 0,
         status: 'pending'
       };
-      console.log(classInfo);
+      // console.log(classInfo);
 
       const res = await axiosSecure.post("/classes", classInfo);
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.insertedId) {
         reset();
         Swal.fire({

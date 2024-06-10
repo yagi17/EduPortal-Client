@@ -11,7 +11,7 @@ const MyEnrollClassDetails = () => {
   const { id } = useParams();
   const { user } = useAuth();
   const [assignmentInfo, setAssignmentInfo] = useState();
-  console.log(assignmentInfo);
+  // console.log(assignmentInfo);
   const count = assignmentInfo?.assignmentSubmission;
 
   const axiosSecure = useAxiosSecure();
@@ -91,7 +91,7 @@ const MyEnrollClassDetails = () => {
         }
         // console.log(res.data);
       });
-    console.log("Submitted", data);
+    // console.log("Submitted", data);
   };
 
   return (
