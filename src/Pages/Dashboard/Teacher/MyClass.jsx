@@ -18,8 +18,6 @@ const MyClass = () => {
     },
   });
 
-  
-
   const handleDelete = (myClass) => {
     Swal.fire({
       title: "Are you sure?",
@@ -49,24 +47,34 @@ const MyClass = () => {
 
   return (
     <>
-      <div className="overflow-x-auto max-w-screen-lg  rounded-xl mx-auto mt-5">
-        <table className="table max-w-screen-md">
-          {/* head */}
+      <div className="max-w-screen-lg mx-auto">
+        <h1 className="text-center text-4xl font-bold my-8">CLASS LIST</h1>
+        <table className="w-full mx-auto divide-y divide-gray-200">
           <thead>
-            <tr className="bg-[#DFE1FB]">
-              <th></th>
-              <th>Class Details</th>
-              <th>Category</th>
-              <th>Status</th>
-              <th>Update</th>
-              <th>Reject</th>
+            <tr className="bg-gray-400 text-white items-center rounded-t-xl">
+              <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider justify-center items-center"></th>
+              <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                Class Details
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                Category
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                Status
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                Actions
+              </th>
+
             </tr>
           </thead>
-          <tbody>
-            {myClasses.map((myClass, index) => (
+          <tbody className="bg-white divide-y divide-gray-200">
+            {myClasses?.map((myClass, index) => (
               <tr key={myClass._id}>
-                <th>{index + 1}</th>
-                <td>
+                <th className="px-6 font-semibold py-4 whitespace-nowrap">
+                  {index + 1}
+                </th>
+                <td className="px-6 font-semibold py-4 whitespace-nowrap">
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
@@ -79,12 +87,12 @@ const MyClass = () => {
                     </div>
                   </div>
                 </td>
-                <td>
+                <td className="px-6 font-semibold py-4 whitespace-nowrap">
                   <span className="badge badge-ghost badge-sm">
                     {myClass.category}
                   </span>
                 </td>
-                <th>
+                <td className="px-6 py-4 whitespace-nowrap capitalize">
                   <h2
                     className={
                       myClass.status === "approved"
@@ -102,35 +110,23 @@ const MyClass = () => {
                       "Pending"
                     )}
                   </h2>
-                </th>
-                <th>
-                  <Link to={`/dashboard/my-classes/${myClass?._id}`}>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                <Link to={`/dashboard/my-classes/${myClass?._id}`}>
                     <button className="btn btn-md bg-[#D1A054] text-white border-0 shadow-none hover:bg-[#D1A054]">
                       <FaEdit />
                     </button>
                   </Link>
-                </th>
-                <th>
                   <button
                     onClick={() => handleDelete(myClass)}
-                    className="btn bg-red-700  text-white border-0 shadow-none hover:bg-red-700"
+                    className="btn ml-2 bg-red-700  text-white border-0 shadow-none hover:bg-red-700"
                   >
                     <FaTrashAlt />
                   </button>
-                </th>
+                </td>
               </tr>
             ))}
           </tbody>
-          <tfoot className="bg-[#DFE1FB] rounded-t-xl">
-            <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-            </tr>
-          </tfoot>
         </table>
       </div>
     </>

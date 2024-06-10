@@ -162,7 +162,7 @@ const TeachOn = () => {
 
           <div className="form-control">
             <button className="btn bg-[#1DA678] hover:glass hover:bg-[#1DA678] text-white">
-              Send A Request
+              Submit for review
             </button>
           </div>
         </form>

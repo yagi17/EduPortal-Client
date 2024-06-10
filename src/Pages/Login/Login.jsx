@@ -1,10 +1,8 @@
 import { useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
+
 import SocialLogin from "../../Components/SocialLogin";
 
 const Login = () => {

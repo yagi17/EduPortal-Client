@@ -40,7 +40,7 @@ const MyEnrollClass = () => {
                 <PrimaryBtn
                   customClass={"btn-sm "}
                   name={"Continue Course"}
-                  link={`/dashboard/myEnroll-class/${item._id}`}
+                  link={`/dashboard/myEnroll-class/${item.classData._id}`}
                 />
               </div>
             </div>

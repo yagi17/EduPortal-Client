@@ -47,7 +47,7 @@ const FeedBack = () => {
 
                 <div className="avatar pb-10">
                   <div className="w-20 rounded-full">
-                    <img src={"userName"} />
+                    <img src={review.userImage} />
                   </div>
                 </div>
                 <h3 className="text-sm font-semibold mb-4">

@@ -68,25 +68,35 @@ const AllClass = () => {
 
   return (
     <>
-      <div className="overflow-x-auto max-w-screen-lg  rounded-xl mx-auto mt-5">
-        <table className="table">
-          {/* head */}
+        <h1 className="text-center text-4xl font-bold my-8">CLASS LIST</h1>
+        <table className="max-w-screen-md mt-10 mx-auto divide-y divide-gray-200 ">
           <thead>
-            <tr className="bg-[#DFE1FB]">
-              <th></th>
-              <th>Class Details</th>
-              <th>Email</th>
-              <th>Category</th>
-              <th>Status</th>
-              <th>Update</th>
-              <th>Reject</th>
+            <tr className="bg-gray-400 text-white items-center rounded-t-xl">
+              <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider justify-center items-center"></th>
+              <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                Class Details
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                Email
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                Category
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                Status
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                Action
+              </th>
             </tr>
           </thead>
-          <tbody>
-            {classes.map((classInfo, index) => (
+          <tbody className="bg-white divide-y divide-gray-200">
+            {classes?.map((classInfo, index) => (
               <tr key={classInfo._id}>
-                <th>{index + 1}</th>
-                <td>
+                <th className="px-6 font-semibold py-4 whitespace-nowrap">
+                  {index + 1}
+                </th>
+                <td className="px-6 font-semibold py-4 whitespace-nowrap">
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
@@ -96,22 +106,22 @@ const AllClass = () => {
                     <div>
                       <div className="font-bold">{classInfo.title}</div>
                       <div className="text-sm opacity-50">
-                        {classInfo.email}
+                        {classInfo.teacher_email}
                       </div>
                     </div>
                   </div>
                 </td>
-                <td>
+                <td className="px-6 font-semibold py-4 whitespace-nowrap">
                   <span className="badge badge-ghost badge-sm">
                     {classInfo.teacher_email}
                   </span>
                 </td>
-                <td>
+                <td className="px-6 font-semibold py-4 whitespace-nowrap">
                   <span className="badge badge-ghost badge-sm">
                     {classInfo.category}
                   </span>
                 </td>
-                <th>
+                <td className="px-6 py-4 whitespace-nowrap capitalize">
                   <h2
                     className={
                       classInfo.status === "approved"
@@ -121,42 +131,26 @@ const AllClass = () => {
                   >
                     {classInfo.status === "approved" ? "Approved" : "Pending"}
                   </h2>
-                </th>
-                <th>
-
-                    <button
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap flex items-center">
+                  <button
                     disabled={classInfo.status === "approved"}
-                      onClick={() => handleApprove(classInfo)}
-                      className="btn bg-[#1DA678] text-white text-3xl border-0 shadow-none hover:bg-[#1DA678]"
-                    >
-                      <IoCheckmarkDoneCircleOutline />
-                    </button>
-                  
-                </th>
-                <th>
+                    onClick={() => handleApprove(classInfo)}
+                    className="btn bg-[#1DA678] text-white text-3xl border-0 shadow-none hover:bg-[#1DA678]"
+                  >
+                    <IoCheckmarkDoneCircleOutline />
+                  </button>
                   <button
                     onClick={() => handleDelete(classInfo)}
-                    className="btn bg-red-600  text-white border-0 shadow-none hover:bg-red-700"
+                    className="btn ml-2 bg-red-600  text-white border-0 shadow-none hover:bg-red-700"
                   >
                     <FaTrashAlt />
                   </button>
-                </th>
+                </td>
               </tr>
             ))}
           </tbody>
-          <tfoot className="bg-[#DFE1FB] rounded-t-xl">
-            <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-            </tr>
-          </tfoot>
         </table>
-      </div>
     </>
   );
 };

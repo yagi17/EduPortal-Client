@@ -7,19 +7,14 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 
 const MyClassDetails = () => {
   const { id } = useParams();
-  //   console.log("Class ID:", id);
+
 
   const axiosSecure = useAxiosSecure();
 
-  const [assignments, setAssignments] = useState([]);
-  console.log(assignments);
-
-  // Fetch assignments based on classID
   const { data: classAssignments = [], refetch } = useQuery({
     queryKey: ["assignments", id],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/assignments/${id}`);
-      setAssignments(res.data);
+      const res = await axiosSecure.get(`/class/assignments/${id}`);
       return res.data;
     },
   });
@@ -44,7 +39,7 @@ const MyClassDetails = () => {
     console.log(assignmentDetails);
 
     axiosSecure.post("/assignments", assignmentDetails).then((res) => {
-    //   console.log(res.data);
+      //   console.log(res.data);
       if (res.data.insertedId) {
         refetch();
         reset();
@@ -53,7 +48,7 @@ const MyClassDetails = () => {
   };
 
   const [text, setText] = useState("");
-  const maxLength = 200;
+  const maxLength = 400;
 
   const handleChange = (event) => {
     setText(event.target.value);
@@ -146,14 +141,16 @@ const MyClassDetails = () => {
                   </div>
                   <div className="form-control">
                     <button className="btn bg-[#1DA678] hover:bg-[#1DA678] text-white">
-                      Log-In
+                      Add Assignment
                     </button>
                   </div>
                 </form>
               </div>
             </dialog>
           </div>
-          <h2 className="navbar-end md:flex hidden">Class Details for ID: #{id}</h2>
+          <h2 className="navbar-end md:flex hidden">
+            Class Details for ID: #{id}
+          </h2>
         </div>
 
         <table className="w-full mx-auto divide-y divide-gray-200">
@@ -171,26 +168,42 @@ const MyClassDetails = () => {
               <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
                 Submitted
               </th>
+              <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                Action
+              </th>
             </tr>
           </thead>
 
           <tbody className="bg-white divide-y divide-gray-200">
-            {assignments?.map((assignment, index) => (
-              <tr key={assignment._id}>
-                <th className="px-6 font-semibold py-4 whitespace-nowrap">
-                  {index + 1}
-                </th>
-                <td className="px-6 font-semibold py-4 whitespace-nowrap">
-                  {assignment.assignmentName}
-                </td>
-                <td className="px-6 font-semibold py-4 whitespace-nowrap">
-                  {assignment.assignmentDeadline}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap capitalize">
-                  {assignment.assignmentSubmission}
-                </td>
-              </tr>
-            ))}
+            {classAssignments?.map((assignment, index) => {
+              const date = new Date(assignment.assignmentDeadline);
+              const formattedDate = date.toLocaleDateString("en-Uk", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              });
+
+              return (
+                <tr key={assignment._id}>
+                  <th className="px-6 font-semibold py-4 whitespace-nowrap">
+                    {index + 1}
+                  </th>
+                  <td className="px-6 font-semibold py-4 whitespace-nowrap">
+                    {assignment.assignmentName}
+                  </td>
+                  <td className="px-6 font-semibold py-4 whitespace-nowrap">
+                    {formattedDate}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap capitalize">
+                    {assignment.assignmentSubmission}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap capitalize">
+                    <button className="btn">Delete</button>
+                  </td>
+
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
